@@ -45,36 +45,6 @@ Transforms applied:
 - MySQL escapes `\'` → `''`, `'0000-00-00'` → `NULL`
 - AUTO_INCREMENT, ENGINE=, DEFAULT CHARSET, COLLATE: stripped
 
-## `tools/fetch_wiki.py`
-
-Bulk-downloads pages from a wiki source into HTML cache. Used to seed the
-docs site reference pages. Output is just raw HTML; conversion to Markdown is
-a separate step (`html_to_md.py`).
-
-```bash
-python tools/fetch_wiki.py docs/.wiki_cache
-```
-
-Sleeps 8s between requests to avoid rate limits. Skips files already cached
-(size > 5KB) so re-runs are cheap.
-
-## `tools/html_to_md.py`
-
-Converts cached HTML pages to Starlight-flavored Markdown.
-
-```bash
-python tools/html_to_md.py docs/.wiki_cache docs/src/content/docs
-```
-
-Behavior:
-
-- Strips MediaWiki chrome (sidebar, edit links, navbox, archive.org banner)
-- Converts `<h1..h6>`, `<p>`, `<ul>`/`<ol>`, `<table>`, `<pre>`, `<code>`, `<a>`, `<strong>`/`<em>`
-- Maps known upstream page names to MR doc slugs via `PAGE_TO_SLUG`
-- **Strips all hyperlinks back to the upstream wiki or archive.org** — link text
-  is preserved as plain text. No content links out of the MR docs site
-- Emits Starlight frontmatter (title + description) per page
-
 ## Tools not shipped (yet)
 
 Ideas worth implementing later:

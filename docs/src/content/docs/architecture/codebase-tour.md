@@ -19,9 +19,7 @@ MeteorReborn/
 ├── tests/MeteorReborn.Common.Tests/
 ├── tools/
 │   ├── MeteorReborn.Launcher/        # WPF .NET 10 launcher
-│   ├── sql_mysql_to_postgres.py      # SQL converter
-│   ├── fetch_wiki.py                 # Docs prep helper
-│   └── html_to_md.py                 # Docs prep helper
+│   └── sql_mysql_to_postgres.py      # MySQL→Postgres dump converter
 ├── data/
 │   ├── sql/                  # 65+ Postgres dumps + zz_* migrations
 │   ├── scripts/              # 1254 Lua scripts (NPCs, quests, commands, effects)
