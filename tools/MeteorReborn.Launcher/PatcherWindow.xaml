@@ -1,0 +1,69 @@
+<Window x:Class="MeteorReborn.Launcher.PatcherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Meteor Reborn — Updating Game"
+        Width="620" Height="320"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource BgDark}">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Updating FFXIV client to 1.23b"
+                   FontSize="16" FontWeight="Bold"
+                   Foreground="{StaticResource AccentGold}"/>
+
+        <!-- Download row -->
+        <StackPanel Grid.Row="1" Margin="0,16,0,0">
+            <DockPanel>
+                <TextBlock x:Name="TxtDlPercent" DockPanel.Dock="Right" Text="0%"
+                           FontSize="11" Foreground="{StaticResource TextSecondary}"
+                           HorizontalAlignment="Right"/>
+                <TextBlock x:Name="TxtDlStatus" Text="Download: waiting..."
+                           FontSize="12" Foreground="{StaticResource TextPrimary}"/>
+            </DockPanel>
+            <ProgressBar x:Name="DlProgress" Margin="0,6,0,0"
+                         Height="18" Minimum="0" Maximum="1" Value="0"
+                         Background="{StaticResource BgInput}"
+                         Foreground="{StaticResource AccentGold}"/>
+        </StackPanel>
+
+        <!-- Apply row -->
+        <StackPanel Grid.Row="2" Margin="0,16,0,0">
+            <DockPanel>
+                <TextBlock x:Name="TxtApPercent" DockPanel.Dock="Right" Text="0%"
+                           FontSize="11" Foreground="{StaticResource TextSecondary}"
+                           HorizontalAlignment="Right"/>
+                <TextBlock x:Name="TxtApStatus" Text="Apply: waiting for downloads..."
+                           FontSize="12" Foreground="{StaticResource TextPrimary}"/>
+            </DockPanel>
+            <ProgressBar x:Name="ApProgress" Margin="0,6,0,0"
+                         Height="18" Minimum="0" Maximum="1" Value="0"
+                         Background="{StaticResource BgInput}"
+                         Foreground="{StaticResource AccentGold}"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" x:Name="TxtCurrent" Text=""
+                   FontSize="11"
+                   Foreground="{StaticResource TextSecondary}"
+                   Margin="0,12,0,0"/>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="BtnCancel" Content="Cancel"
+                    Width="100" Height="30"
+                    Background="{StaticResource BgInput}"
+                    Foreground="{StaticResource TextPrimary}"
+                    BorderBrush="#FF2A4A7F"
+                    Click="OnCancelClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

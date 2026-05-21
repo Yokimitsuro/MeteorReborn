@@ -1,0 +1,88 @@
+# LANG-ADAPT (PM-MISSING — PM no tiene docker-compose, MR-original infrastructure).
+# Postgres + 4 servicios MR: Login (HTTP), Lobby, Map, World.
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: meteorreborn-postgres
+    environment:
+      POSTGRES_USER: meteor
+      POSTGRES_PASSWORD: meteor
+      POSTGRES_DB: meteor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./data/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U meteor"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  login:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT: MeteorReborn.Login
+    container_name: meteorreborn-login
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "17743:17743"   # FINISH-PM (MR-original) — HTTP login endpoint para el launcher
+    volumes:
+      - ./data:/data:ro
+
+  lobby:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT: MeteorReborn.Lobby
+    container_name: meteorreborn-lobby
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "54994:54994"   # PM Lobby Server/ConfigConstants.cs:56 default
+    volumes:
+      - ./data:/data:ro
+
+  map:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT: MeteorReborn.Map
+    container_name: meteorreborn-map
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "1989:1989"     # PM Map Server/ConfigConstants.cs:56 default
+    volumes:
+      - ./data:/data:ro
+
+  world:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT: MeteorReborn.World
+    container_name: meteorreborn-world
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "54992:54992"   # PM World Server/ConfigConstants.cs:59 default
+    volumes:
+      - ./data:/data:ro
+    extra_hosts:
+      # Para que World (dentro de docker) pueda alcanzar Map vía la IP del host.
+      # `server_zones.serverip = 'host.docker.internal'` resuelve igual desde el cliente Windows.
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  postgres-data:

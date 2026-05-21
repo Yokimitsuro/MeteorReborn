@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- PM `BasePacket.cs` y `SubPacket.cs` usan `unsafe` para Marshal struct↔bytes. PM .NET Framework lo permitía por default; .NET 10 lo requiere explícito. LANG-ADAPT. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Para `NpgsqlParameterExtensions` (LANG-ADAPT uint→Bigint mapping para Npgsql 9). -->
+    <PackageReference Include="Npgsql" Version="9.0.2" />
+  </ItemGroup>
+
+</Project>

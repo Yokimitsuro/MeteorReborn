@@ -1,0 +1,56 @@
+// PM-COMPLETE → verbatim port de World Server/Packets/Receive/HelloPacket.cs (54 líneas).
+// LANG-ADAPT: namespace + nullable + NLog→Serilog + MySql→Npgsql donde aplique.
+﻿/*
+===========================================================================
+Copyright (C) 2015-2019 Project Meteor Dev Team
+
+This file is part of Project Meteor Server.
+
+Project Meteor Server is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Project Meteor Server is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Project Meteor Server. If not, see <https:www.gnu.org/licenses/>.
+===========================================================================
+*/
+
+using System;
+using System.IO;
+using System.Text;
+
+namespace MeteorReborn.World.Packets.Receive
+{
+    class HelloPacket
+    {
+        public bool invalidPacket = false;
+        public uint sessionId;
+
+        public HelloPacket(byte[] data)
+        {
+            using (MemoryStream mem = new MemoryStream(data))
+            {
+                using (BinaryReader binReader = new BinaryReader(mem))
+                {
+                    try
+                    {
+                        byte[] readIn = new byte[12];
+                        binReader.BaseStream.Seek(0x14, SeekOrigin.Begin);
+                        binReader.Read(readIn, 0, 12);
+                        sessionId = UInt32.Parse(Encoding.ASCII.GetString(readIn));
+                    }
+                    catch (Exception)
+                    {
+                        invalidPacket = true;
+                    }
+                }
+            }
+        }
+    }
+}

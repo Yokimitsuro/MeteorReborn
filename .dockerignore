@@ -1,0 +1,11 @@
+# Exclude local build artifacts so Docker build doesn't inherit host paths
+# (e.g. Windows NuGet fallback folders leaking via obj/project.assets.json).
+**/bin/
+**/obj/
+**/.vs/
+**/.idea/
+**/.vscode/
+**/*.user
+.git/
+tools/MeteorReborn.Launcher/bin/
+tools/MeteorReborn.Launcher/obj/

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MeteorReborn.Launcher</RootNamespace>
+    <AssemblyName>MeteorReborn.Launcher</AssemblyName>
+    <IsPublishable Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' != 'true'">false</IsPublishable>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Description>Launcher for FFXIV 1.0 (1.23b) — Meteor Reborn</Description>
+  </PropertyGroup>
+
+</Project>

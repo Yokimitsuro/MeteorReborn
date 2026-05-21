@@ -1,0 +1,39 @@
+// PM-COMPLETE → verbatim port de Lobby Server/Packets/Receive/SelectCharacterPacket.cs (PM:22-57).
+// LANG-ADAPT: namespace.
+
+using System;
+using System.IO;
+
+namespace MeteorReborn.Lobby.Packets.Receive;
+
+class SelectCharacterPacket
+{
+    public UInt64 sequence;
+    public uint characterId;
+    public uint unknownId;
+    public UInt64 ticket;
+
+    public bool invalidPacket = false;
+
+    public SelectCharacterPacket(byte[] data)
+    {
+        using (MemoryStream mem = new MemoryStream(data))
+        {
+            using (BinaryReader binReader = new BinaryReader(mem))
+            {
+                try
+                {
+                    sequence = binReader.ReadUInt64();
+                    characterId = binReader.ReadUInt32();
+                    unknownId = binReader.ReadUInt32();
+                    ticket = binReader.ReadUInt64();
+                }
+                catch (Exception)
+                {
+                    invalidPacket = true;
+                }
+            }
+        }
+    }
+
+}

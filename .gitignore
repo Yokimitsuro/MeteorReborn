@@ -1,0 +1,35 @@
+# --- Build artifacts ---
+**/bin/
+**/obj/
+**/*.user
+**/.vs/
+**/.idea/
+**/.vscode/
+*.suo
+*.userprefs
+*.dotsettings.user
+
+# --- Generated / cache ---
+# 5GB de patches descargados por el launcher: NO subir
+data/clientPatch/**/*.patch
+*.log
+*.tmp
+
+# --- IDE / OS junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# --- tools/ exclusions ---
+# Solo MeteorReborn.Launcher se sube. El resto son utilities locales o experimentales.
+tools/HashTester/
+tools/MeteorReborn.PacketProxy/
+tools/MeteorReborn.PacketTool/
+tools/decode_lpb.py
+
+# --- Launcher settings (vive en %APPDATA%) ---
+**/launcher.json
+
+# --- Tracker interno, no se sube ---
+PORT_PROGRESS.md

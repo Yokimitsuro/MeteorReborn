@@ -1,0 +1,131 @@
+<Window x:Class="MeteorReborn.Launcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Meteor Reborn — FINAL FANTASY XIV 1.23b"
+        Width="480" Height="580"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource BgDark}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource BgPanel}" Padding="20,18">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="METEOR REBORN"
+                           FontSize="28" FontWeight="Bold"
+                           Foreground="{StaticResource AccentGold}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="FINAL FANTASY XIV — version 1.23b"
+                           FontSize="12"
+                           Foreground="{StaticResource TextSecondary}"
+                           HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Login Form -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+        <Border Padding="40,30">
+            <StackPanel VerticalAlignment="Top">
+
+                <!-- Username -->
+                <TextBlock Text="USERNAME" FontSize="12" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextSecondary}" Margin="0,0,0,6"/>
+                <TextBox x:Name="TxtUsername" Style="{StaticResource DarkTextBox}"
+                         KeyDown="OnInputKeyDown"/>
+
+                <!-- Password -->
+                <TextBlock Text="PASSWORD" FontSize="12" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextSecondary}" Margin="0,18,0,6"/>
+                <PasswordBox x:Name="TxtPassword" Style="{StaticResource DarkPasswordBox}"
+                             KeyDown="OnInputKeyDown"/>
+
+                <!-- Error message -->
+                <TextBlock x:Name="TxtError" Text=""
+                           FontSize="12" Foreground="{StaticResource ErrorRed}"
+                           Margin="0,12,0,0" TextWrapping="Wrap"
+                           Visibility="Collapsed"/>
+
+                <!-- Status -->
+                <TextBlock x:Name="TxtStatus" Text=""
+                           FontSize="12" Foreground="{StaticResource TextSecondary}"
+                           Margin="0,12,0,0" HorizontalAlignment="Center"
+                           Visibility="Collapsed"/>
+
+                <!-- Login Button -->
+                <Button x:Name="BtnLogin" Content="PLAY"
+                        Style="{StaticResource GoldButton}"
+                        Margin="0,24,0,0" HorizontalAlignment="Stretch"
+                        Click="OnLoginClick"/>
+
+                <!-- Register link -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,16,0,0">
+                    <TextBlock Text="Don't have an account? "
+                               FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                    <Button Content="Create account" Style="{StaticResource LinkButton}"
+                            Click="OnRegisterClick"/>
+                </StackPanel>
+
+                <!-- Settings -->
+                <Expander Header="Settings" Margin="0,24,0,0"
+                          Foreground="{StaticResource TextSecondary}" FontSize="12">
+                    <StackPanel Margin="0,10,0,0">
+
+                        <TextBlock Text="Game path" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" Margin="0,0,0,4"/>
+                        <DockPanel>
+                            <Button x:Name="BtnBrowse" Content="..." DockPanel.Dock="Right"
+                                    Width="36" Background="{StaticResource BgInput}"
+                                    Foreground="{StaticResource TextPrimary}"
+                                    BorderBrush="#FF2A4A7F" Margin="6,0,0,0"
+                                    Click="OnBrowseClick"/>
+                            <TextBox x:Name="TxtGamePath" Style="{StaticResource DarkTextBox}"
+                                     FontSize="11"/>
+                        </DockPanel>
+
+                        <TextBlock Text="Login server" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" Margin="0,12,0,4"/>
+                        <TextBox x:Name="TxtLoginServer" Style="{StaticResource DarkTextBox}"
+                                 FontSize="11" Text="http://127.0.0.1:17743"/>
+
+                        <TextBlock Text="Lobby server (IP:Port)" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" Margin="0,12,0,4"/>
+                        <TextBox x:Name="TxtLobbyServer" Style="{StaticResource DarkTextBox}"
+                                 FontSize="11" Text="127.0.0.1:54994"/>
+
+                        <TextBlock Text="Language (1=JP, 2=EN, 3=DE, 4=FR)" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" Margin="0,12,0,4"/>
+                        <TextBox x:Name="TxtLanguage" Style="{StaticResource DarkTextBox}"
+                                 FontSize="11" Text="2"/>
+
+                        <TextBlock Text="Patch source folder (cached .patch files; auto-downloaded if missing)" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" Margin="0,12,0,4"/>
+                        <TextBox x:Name="TxtPatchSource" Style="{StaticResource DarkTextBox}"
+                                 FontSize="11"/>
+
+                        <TextBlock Text="Patch download URL base" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" Margin="0,12,0,4"/>
+                        <TextBox x:Name="TxtPatchUrl" Style="{StaticResource DarkTextBox}"
+                                 FontSize="11"/>
+
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+        </Border>
+        </ScrollViewer>
+
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="{StaticResource BgPanel}" Padding="12,8">
+            <TextBlock Text="Meteor Reborn — FFXIV 1.0 Server Emulator (1.23b)"
+                       FontSize="10" Foreground="{StaticResource TextSecondary}"
+                       HorizontalAlignment="Center"/>
+        </Border>
+    </Grid>
+</Window>
