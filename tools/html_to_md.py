@@ -87,6 +87,7 @@ class WikiHtmlParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.in_content = False
+        self.content_depth = 0     # nested <div> count INSIDE mw-content-text
         self.skip_depth = 0
         self.out = []
         self.tag_stack = []
@@ -143,11 +144,16 @@ class WikiHtmlParser(HTMLParser):
         # Detect main content container — only emit text inside it.
         if tag == "div" and attrs_d.get("id") == "mw-content-text":
             self.in_content = True
-            self.tag_stack.append(("content_marker", True))
+            self.content_depth = 1
+            self.tag_stack.append((tag, "content_root"))
             return
 
         if not self.in_content:
             return
+
+        # Track div nesting depth so we know when the article body ends.
+        if tag == "div":
+            self.content_depth += 1
 
         # Skip MediaWiki chrome and archive.org banners.
         skip_classes = {
@@ -249,13 +255,22 @@ class WikiHtmlParser(HTMLParser):
             return
         if state == "in_skip":
             return
-        if state is True and tag == "div":
-            # closing the main content marker
+        if state == "content_root" and tag == "div":
+            # Closing the mw-content-text root div — end content emission.
             self.in_content = False
+            self.content_depth = 0
             return
 
         if not self.in_content:
             return
+
+        # Track nesting depth: when we exit the last inner div, exit content.
+        if tag == "div":
+            self.content_depth -= 1
+            if self.content_depth <= 0:
+                self.in_content = False
+                self.content_depth = 0
+                return
 
         # Close block tags
         if tag == "p":
@@ -383,13 +398,19 @@ class WikiHtmlParser(HTMLParser):
         return md.strip() + "\n"
 
 
-def convert_one(html_path: Path, out_dir: Path, slug_root: Path):
+def convert_one(html_path: Path, out_dir: Path, slug_root: Path, force: bool = False):
     page = html_path.stem
     slug = PAGE_TO_SLUG.get(page)
     if not slug:
         print(f"SKIP {page}: no slug mapping")
         return
     title = PAGE_TITLES.get(page, page.replace("_", " "))
+    out_file_check = slug_root / f"{slug}.md"
+    if out_file_check.exists() and not force:
+        # Already exists — likely hand-edited. Don't clobber unless --force is passed.
+        # Run `python html_to_md.py <cache> <out> --force` to override.
+        print(f"SKIP {page}: {out_file_check.relative_to(slug_root.parent.parent)} exists (use --force to overwrite)")
+        return
 
     raw = html_path.read_bytes().decode("utf-8", errors="replace")
     parser = WikiHtmlParser()
@@ -415,8 +436,9 @@ def main():
         sys.exit(1)
     cache = Path(sys.argv[1])
     out_dir = Path(sys.argv[2])
+    force = "--force" in sys.argv[3:]
     for html in sorted(cache.glob("*.html")):
-        convert_one(html, out_dir, out_dir)
+        convert_one(html, out_dir, out_dir, force=force)
 
 
 if __name__ == "__main__":
