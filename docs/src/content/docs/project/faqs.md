@@ -1,155 +1,96 @@
 ---
 title: FAQs
-description: Frequently asked questions about running and developing Meteor Reborn.
+description: FFXIV 1.0 reference for Meteor Reborn.
 ---
 
-## General
+### General
 
-### What is Meteor Reborn?
+ 
 
-A revival of [Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server)
-— the FFXIV 1.0 server emulator abandoned in 2019 — ported to a modern stack
-(.NET 10, PostgreSQL 17, Docker). Includes a WPF launcher that patches the
-client to 1.23b before connecting.
+#### None of the commands work / Lots of LUA errors in the log
 
-### Is this legal?
+  You didn't copy the /scripts/ folder to your map server directory. 
 
-The server code is original or PM-derived (AGPL-3.0, see [credits](/)). The
-project does **not** distribute the FFXIV client binaries, the official `.patch`
-files, or any SQUARE ENIX-owned assets. Players supply their own legally-acquired
-copy of the 1.0/1.23b client. The launcher just patches an install you already
-have.
+#### I cannot connect to Seventh Umbral
 
-### Which version of FFXIV?
+  Project Meteor is **not** associated with that project, but that server has not functioned in quite some time. You'll only get as far as seeing the title screen with it, as its lobby server will time-out if you attempt to open the character select screen. 
 
-Patch 1.23b (game version `2012.09.19.0001`, boot version `2010.09.18.0000`).
-That's the last public 1.0 build before the world reset, and the version the
-PM protocol implementation targets.
+#### _______ in the interface doesn't work
 
-### Can I play 2.x / Endwalker / Dawntrail with this?
+  Some elements of the Main Menu (opened via dash on numpad) are either in a read-only state so you can see it, but not modify. Others will cause a LUA script error to appear in your chat log. More client functionality will be restored over time as the project progresses. 
 
-No. Meteor Reborn is exclusively for FFXIV 1.0. The 2.x+ protocol is entirely
-different and there are mature server emulator projects for those eras.
+#### _______ in the world doesn't work
 
-## Setup
+  Currently, the only functioning elements are doors with known IDs assigned while you're in the zone ID associated with it, and whichever NPCs are scripted to have player interaction.  
 
-### Why Docker?
+#### How do I skip the opening tutorial?
 
-It removes the "five services + a Postgres" setup pain. One `docker compose up`
-brings up the whole stack with a known-good schema and config. Without Docker,
-[native mode](/MeteorReborn/getting-started/native/) requires manually
-installing Postgres 17, loading 65 SQL dumps, and starting four .NET processes.
+ As it stands, you'll have to go into map server's scripts folder and modify player.lua. Notepad will work if you have no dedicated LUA reader. Open it up and comment out the If statement involving player:getPlayTime. LUA commenting uses -- for a line, or --[[ with --]] to comment a block. Now create/recreate a character and [warp](/MeteorReborn/reference/gm-commands/) out of the starting location. 
 
-### Why PostgreSQL instead of MySQL?
+#### I keep seeing script errors in the log
 
-PM ran on MySQL 5.7. We picked Postgres 17 for the port because:
+ These are for debugging purposes and will be remedied over time as the actors (NPCs/Enemies/etc) are implemented. 
 
-- Free, modern, single-image Docker container
-- Better type system (booleans, jsonb, generated columns)
-- Strict SQL is easier to write code against than MySQL's permissive defaults
-- Npgsql is a first-class .NET driver
+#### What are the commands?
 
-Some MySQL→Postgres adaptations were needed (`ON CONFLICT` instead of
-`ON DUPLICATE KEY`, `DISTINCT ON` instead of permissive `GROUP BY`, etc).
-See [port notes](/MeteorReborn/architecture/port-notes/).
+  Refer to [Debug_Commands](/MeteorReborn/reference/gm-commands/) 
 
-### What about the client install?
+#### The game hangs at the loading screen
 
-You need a 1.0 / 1.x client install. Any version from 2010-09 to 2012-09
-works as a starting point — the launcher will detect via `game.ver` and apply
-the chain of official `.patch` files to bring it up to 1.23b.
+  This is an uncommon issue with the Map server. Just close and reload it, the game will prompt and error and return you to the lobby where you can try again. 
 
-## Connection issues
+#### I only see actors in the Adventurer's Guild
 
-### Launcher won't connect to login server
+  The cities are broken up into two zone IDs internally, as they were on retail servers. One for the Adventurer's Guild, and one for the rest of the city.  Seamless changing of Zone IDs are currently not implemented, but you can utilize the [warp](/MeteorReborn/reference/gm-commands/) command to change them yourself.  The zone IDs for the cities are as follow: 
 
-Check `docker compose ps` — make sure the `login` container is healthy.
-Curl-test:
+     
+| Location | Guild | City |
+|---|---|---|
+| Limsa Lominsa | 133 | 230 |
+| Gridania | 155 | 206 |
+| Ul'dah | 175 | 209 |
 
-```bash
-curl http://127.0.0.1:17743/
-# Expect: {"service":"MeteorReborn Login","status":"ok"}
-```
+ 
 
-If you changed `data/config/login_config.ini`, restart the login container.
+#### I can't get a certain Zone ID to work
 
-### Client crashes immediately after PLAY
+  The zone list from [Regions](/MeteorReborn/world/regions/) isn't fully implemented in the server_zones database.  Some of the zoneName and className fields have yet to be determined for authenticity. 
 
-Most likely the in-memory patch didn't apply correctly. Check launcher logs
-(should print `ffxivgame.exe lanzado (PID ...)`). If `WriteProcessMemory failed`
-appears, the FFXIV exe RVAs probably don't match a 1.23b binary — verify your
-client install with the launcher's version check.
+#### How do I use the mounts?
 
-### Client connects to lobby but disconnects after character select
+  There is currently no ingame means of obtaining them on the master branch.   To manually add the Chocobo and/or Goobue mount to a character: 
+-  Open up your ffxiv_server database, get your character's ID from the characters table  
+-  Go into the characters_chocobo table, insert a row, enter the character's ID in the first column 
+-  Set the hasChocobo/hasGoobue boolean flags from 0 to 1, leave chocoboAppearance to null, and give it a name. 
+-  Reload the map server if you had it running for it to reload the character data
+  On the current develop branch, the chocobo rental NPCs work in their respective city, and are currently flagged to issue you a chocobo if you so desire.  Chocobo barding menu crashes the client currently. We're already aware of the reasons why, just don't select it. 
 
-This is the known [zone-in incomplete](/MeteorReborn/project/unfinished-content/)
-issue. Map server creates the session but the zone-in packet chain doesn't
-complete, client times out around 12 seconds.
+### Client
 
-Workaround for testing: lobby + world + character creation flow works,
-in-world play does not yet.
+ 
 
-### `Loaded 2 monsters` only
+#### The game exe crashes immediately
 
-Expected — PM's SQL dumps only ship 7 monster spawn locations. The 1.0 client
-has 134 monster models, but populating spawn coordinates is content work PM
-never finished. Use `!spawn <actorClassId>` in chat to spawn any of the 134
-models at your position.
+  If you're running a processor which has 16 or more threads available, FFXIV will immediately crash. A quick fix is to: 
+-  Load up the Seventh Umbral launcher,  
+-  Open up Task Manager and go into the Detail tab.  
+-  Right-click `Launcher.exe` (which has orange-bordered FFXIV icon), select "Set affinity".  
+-  Set the CPU affinity for the launcher to 15 or less CPU threads.  
+-  The game should launch properly from there. 
+ 
 
-## Development
+#### I cannot find ffxivgame.exe
 
-### How is the C# code organized?
+  Update your client to v1.23b using the Seventh Umbral launcher. The base retail version didn't have it yet. 
 
-```
-src/MeteorReborn.Common/   — Wire format helpers (BasePacket, SubPacket, Blowfish, ZLib)
-src/MeteorReborn.Login/    — ASP.NET HTTP (FINISH-PM, MR-original)
-src/MeteorReborn.Lobby/    — TCP server :54994
-src/MeteorReborn.World/    — TCP server :54992 (router)
-src/MeteorReborn.Map/      — TCP server :1989 (gameplay engine + Lua)
-tools/MeteorReborn.Launcher — WPF .NET 10 launcher
-```
+ 
 
-Every file has a `// PM-COMPLETE` / `// PM-INCOMPLETE` / `// PM-MISSING` /
-`// LANG-ADAPT` marker at the top. See [port notes](/MeteorReborn/architecture/port-notes/)
-for what each means.
+ 
 
-### How do I add a Lua script?
+### Server
 
-Drop the file in the appropriate `data/scripts/` subfolder. NPCs go under
-`data/scripts/base/chara/npc/<family>/<class>.lua`, GM commands under
-`data/scripts/commands/gm/`, quests under `data/scripts/quests/`. Restart map
-to pick up new files; edits to existing files are re-read on each invocation.
+ 
 
-### How do I run the test suite?
+#### The login page doesn't show
 
-```bash
-cd src
-dotnet test
-```
-
-Currently tests cover `MeteorReborn.Common` only. The TCP servers don't have
-end-to-end coverage yet — that's tracked in
-[unfinished content](/MeteorReborn/project/unfinished-content/).
-
-### Can I contribute?
-
-Yes — PR against `develop`. Follow gitflow: feature branches off `develop`,
-release branches when stable, `master` only for tagged releases. See the
-[GitHub repo](https://github.com/Yokimitsuro/MeteorReborn).
-
-## Performance
-
-### How much RAM/CPU does it use?
-
-Idle (no players): all five containers together use ~150 MB RAM and < 1% CPU.
-Map server is the heaviest (~80 MB) because it loads 8403 items + 2414 static
-actors + 1655 actor classes into memory at boot.
-
-Per active player, expect another ~5 MB of RAM and minimal CPU until in-world
-gameplay drives actor updates.
-
-### How many concurrent players can it handle?
-
-Untested at scale. PM originally targeted dozens-of-players community servers,
-not thousands. The Lua scripting engine (MoonSharp) is single-threaded per
-script context, which is a likely scalability ceiling.
+  Ensure your Apache/PHP/SQL services are properly running and that the contents of the www folder from the Project Meteor Server have been copied over.  Also ensure the ports are properly open. Default settings have port 80 for Apache, 3306 for SQL. The latter can be changed for the project by modifying <Project Directory>/data/config.ini

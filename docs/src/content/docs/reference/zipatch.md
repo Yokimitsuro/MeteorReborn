@@ -1,107 +1,233 @@
 ---
 title: ZIPATCH file structure
-description: Wire format of FFXIV 1.x .patch files as implemented by MR's launcher.
+description: FFXIV 1.0 reference for Meteor Reborn.
 ---
 
-The official FFXIV 1.x `.patch` files use the **ZIPATCH** binary format. MR's
-launcher parses and applies them natively in `PatchFile.cs`.
+### History
 
-## File header
+ 
 
-Every patch starts with a 16-byte header:
+ZiPatch (.patch) files are a compressed file format for FINAL FANTASY XIV. This file format was later modified in 2012 for DRAGON QUEST X and FINAL FANTASY XIV: A Realm Reborn, which are more similar in their DAT structure to each other than to FINAL FANTASY XIV. As such, many of the block types that are found in this version have been deprecated. Static analysis of their executables indicate that they may still be able to read this version. 
 
-| Offset | Size | Value | Meaning |
-|--------|------|-------|---------|
-| 0x00 | 8 | `0x91 'Z' 'I' 'P' 'A' 'T' 'C' 'H'` | Magic |
-| 0x08 | 8 | various | Build metadata (ignored by the parser) |
+Initial, minimal research of the ZiPatch file format was made publically available [[1]](20251119232542/https://github.com/jpd002/SeventhUmbral/blob/master/launcher/PatchFile.cpp) in 2013 by Jean-Philip Desjardins for his open-source server emulator for FINAL FANTASY XIV, SeventhUmbral [[2]](20251119232542/http://seventhumbral.org/). This implementation allowed the ZiPatch files that were backed up by Krizz [[3]](20251119232542/http://tehkrizz.net/) and others in the community to be applied to a new installation and improperly update the client to 1.23b. 
 
-Anything else is rejected with `Invalid patch header (expected ZIPATCH magic)`.
+ 
 
-## Command stream
+### File Header
 
-After the header, the file is a stream of 4-byte ASCII command tags followed
-by tag-specific payloads, in big-endian byte order.
+ 
 
-| Command | Payload | What it does |
-|---------|---------|--------------|
-| `FHDR` | 4 bytes | Format version. Skipped. |
-| `DIFF` | 20 bytes (5 × u32) | Skip. |
-| `HIST` | 20 bytes | Skip. |
-| `APLY` | 20 bytes | Skip. |
-| `ADIR` | pathSize(u32 BE) + path + 16 bytes | Create directory under game root |
-| `DELD` | pathSize(u32 BE) + path + 16 bytes | Delete directory under game root |
-| `ETRY` | pathSize(u32 BE) + path + itemCount(u32 BE) + items + 8 bytes | Replace file with new content |
+ZiPatch files have a unique file header (12 bytes), which is used to identify the file format. The ZiPatch File Header is immediately followed by *n* blocks, read until EOF, each of which provide ffxivupdater.exe with information to carry out specific instructions. 
 
-End-of-file is detected when a 4-byte read returns less than 4 bytes.
+ 
 
-## ETRY item format
+```
+91 5A 49 50 41 54 43 48 0D 0A 1A 0A            ‘ZIPATCH....
+```
 
-`ETRY` carries one file's worth of updates. After the path comes
-`itemCount` items. Each item:
+ 
 
-| Field | Size | Notes |
-|-------|------|-------|
-| `hashMode` | u32 LE | `0x41` = last-hash, `0x44` = first-hash, `0x4D` = both |
-| `srcFileHash` | 20 bytes | SHA-1 of the source file |
-| `dstFileHash` | 20 bytes | SHA-1 of the destination file |
-| `compressionMode` | u32 LE | `0x4E` ('N') = none, `0x5A` ('Z') = zlib |
-| `compressedFileSize` | u32 BE | Bytes that follow this header (0 if not last item) |
-| `previousFileSize` | u32 BE | Pre-patch file size (reference only) |
-| `newFileSize` | u32 BE | Post-patch file size (reference only) |
-| `data` | `compressedFileSize` bytes | Only present on the **last** item; earlier items have `compressedFileSize=0` |
+ 
 
-The first N-1 items describe intermediate states of the patch chain (incremental
-deltas). Only the **final item** carries actual data — that's what MR writes
-to disk.
+ 
 
-## Decompression
+ 
 
-- `0x4E` mode: stream the bytes 1:1 to the output file
-- `0x5A` mode: pipe through a `System.IO.Compression.ZLibStream` (`.NET 6+`'s
-  native zlib decompressor) capped at `compressedFileSize` via a
-  `LimitedStream` wrapper so the decompressor doesn't read beyond the item
+### Block Structure
 
-## How MR applies a chain
+ 
 
-For a chain of patches (e.g. 49 patches to go from launch to 1.23b), the
-launcher:
+```
 
-1. Sorts the patch files by filename — names like `D2010.09.18.0000.patch` are
-   chronological by ASCII sort
-2. For each patch:
-   - Opens the file as a `FileStream`
-   - Calls `PatchFile.Execute(stream, gamePath)`
-   - The parser walks the command stream, creating/deleting directories and
-     replacing files in the game folder
-   - On success, moves to the next patch
-3. After the last patch, writes `<gamePath>/game.ver` = `"2012.09.19.0001"` and
-   `<gamePath>/boot.ver` = `"2010.09.18.0000"`
+struct block_t
+{
+    int size;          // LE
+    char data[];       // size + 4
+    unsigned long crc; // CRC32 (RFC 1952) of data
+}
+```
 
-## Edge cases handled
+ 
 
-| Case | Resolution |
-|------|------------|
-| `ETRY` for a file that doesn't exist | Created (warning logged) |
-| `ETRY` for a parent directory that doesn't exist | Auto-created |
-| `ADIR` for a directory that already exists | Warning, skipped |
-| `DELD` for a directory that doesn't exist | Warning, skipped |
-| File locked by Explorer (icon cache) | Retried up to 5 times with 1s sleep |
-| Unknown command tag | Hard error with offset for debugging |
+The slice, data[0..3], is a string used to identify the block type. Static analysis of ffxivupdater.exe indicates the following block types as valid. 
 
-## Implementation file
+ 
 
-`tools/MeteorReborn.Launcher/PatchFile.cs` — 250 LOC, no external dependencies
-beyond `System.IO.Compression`. Reference port of the C++ implementation in
-the historical Seventh Umbral Launcher.
+```
 
-## Future work
+"FHDR"
+"APLY"
+"APFS"
+"ETRY"
+"ADIR"
+"DELD"
+```
 
-- Hash verification: currently `srcFileHash` / `dstFileHash` are read but not
-  checked. Adding SHA-1 verification would catch corrupted patches before
-  writing bad data.
-- Resumable downloads: if the launcher is killed mid-patch-apply, the partial
-  output file is left behind. A `.tmp` + rename pattern would make application
-  atomic.
-- Parallel apply: independent patches that touch disjoint files could apply in
-  parallel. Not implemented; chain order matters for files patched multiple
-  times.
+ 
+
+ 
+
+ 
+
+#### FHDR
+
+ 
+
+FHDR blocks provide an abstract of the changes that should occur as a result of applying the ZiPatch in terms of the type and count of the changes to be made to the filesystem. 
+
+ 
+
+```
+
+struct fhdr_t
+{
+    char version[4];  // [00 00 02 00] observed; Static analysis of ffxivupdater.exe indicates FileHeaderV2
+    char result[4];   // "DIFF" or "HIST" observed
+    int numEntryFile; // LE
+    int numAddDir;    // LE
+    int numDeleteDir; // LE
+};
+```
+
+ 
+
+#### APLY
+
+ 
+
+APLY blocks have not been reversed. Two APLY blocks always appear immediately after the FHDR block. 
+
+ 
+
+```
+
+struct aply_t
+{
+    int unknown1; // [00 00 00 01] and [00 00 00 02] observed
+    int unknown2; // [00 00 00 04] observed
+    int unknown3; // [00 00 00 01] observed
+};
+```
+
+ 
+
+#### APFS
+
+ 
+
+APFS blocks have not been observed. While unknown, it is assumed that APFS blocks may deal with the filesystem architecture in some way. 
+
+ 
+
+```
+
+struct apfs_t
+{
+};
+```
+
+ 
+
+Static analysis of ffxivupdater.exe indicates the following filesystem architectures as valid. 
+
+ 
+
+```
+
+"NTFS"
+"FAT"
+"FAT12"
+"FAT16"
+"FAT32"
+"CDFS"
+"UDF"
+"EXFAT"
+```
+
+ 
+
+It is unknown whether the following referenced text strings are also involved with APFS blocks. 
+
+ 
+
+```
+
+"Total incremental file size: %lld"
+"Total incremental disk size: %lld"
+"Total incremental max disk size: %lld"
+```
+
+ 
+
+#### ETRY
+
+ 
+
+ETRY blocks provide the information for ffxivupdater.exe to make changes directly to the filesystem by performing explicit operations on the specified file path, relative to the installation directory. The operation is dependent on the chunk_t mode. 
+
+ 
+
+```
+
+struct etry_t
+{
+    int pathSize;     // LE
+    char path[];      // pathSize
+    int count;        // LE
+    chunk_t chunks[]; // count
+};
+
+struct chunk_t
+{
+    int mode;            // [41 00 00 00] 'A'; [44 00 00 00] 'D'; [4D 00 00 00] 'M' observed
+    char prevHash[20];   // SHA-1
+    char nextHash[20];   // SHA-1
+    int compressionMode; // [4E 00 00 00] 'N' and [5A 00 00 00] 'Z' observed
+    int size;            // LE
+    int prevSize;        // LE
+    int nextSize;        // LE
+    char data[];         // size
+};
+```
+
+ 
+
+The chunk_t mode indicates whether the specific entry file chunk_t will be added *A*, deleted *D*, or modified *M*. In order to validate the operation, SHA-1 hashes are used to verify file deltas. The chunk_t compressionMode indicates whether the specific entry file chunk_t has no compression *N* or is compressed with the zlib algorithm *Z*. 
+
+ 
+
+#### ADIR
+
+ 
+
+ADIR blocks provide the information for ffxivupdater.exe to make changes directly to the filesystem by creating a new directory for the specified path, relative to the installation directory, if it does not already exist. 
+
+ 
+
+```
+
+struct adir_t
+{
+    int pathSize; // LE
+    char path[];  // pathSize
+};
+```
+
+ 
+
+#### DELD
+
+ 
+
+DELD blocks provide the information for ffxivupdater.exe to make changes directly to the filesystem by deleting the directory for the specified path, relative to the installation directory, if it exists. 
+
+ 
+
+```
+
+struct deld_t
+{
+    int pathSize; // LE
+    char path[];  // pathSize
+};
+```

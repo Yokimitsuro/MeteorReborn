@@ -14,9 +14,9 @@ List of Quests in FFXIV 1.23b. Each page holds specific notes and information. T
                                                                                                                                          
 | Id | Name | Actor Name | Minimum Level | Prerequisite Quest | Class/Job Type | Status |
 |---|---|---|---|---|---|---|
-| 110001 | Shapeless Melody | Man0l0 | 1 |  | All | Complete[1] |
-| 110002 | Treasures of the Main | Man0l1 | 1 | Shapeless Melody | All | Complete[1] |
-| 110003 | Legends Adrift | Man1l0 | 8 | Treasures of the Main | All | Complete[1] |
+| 110001 | Shapeless Melody | Man0l0 | 1 |  | All | Complete |
+| 110002 | Treasures of the Main | Man0l1 | 1 | Shapeless Melody | All | Complete |
+| 110003 | Legends Adrift | Man1l0 | 8 | Treasures of the Main | All | Complete |
 | 110004 | Never the Twain Shall Meet | Man2l0 | 13 | Legends Adrift | All | In Progress |
 | 110005 | Sundered Skies | Man0g0 | 1 |  | All | In Progress |
 | 110006 | Souls Gone Wild | Man0g1 | 1 | Sundered Skies | All | In Progress |
@@ -33,7 +33,7 @@ List of Quests in FFXIV 1.23b. Each page holds specific notes and information. T
 | 110017 | Lord Errant | Man308 | 38 | Forever Taken | All |  |
 | 110018 | Of Men They Sing | Man402 | 42 | Lord Errant | All |  |
 | 110019 | Futures Perfect | Man406 | 46 | Of Men They Sing | All |  |
-| 110060 | The House Always Wins | Pgl200 | 20 |  |  | Complete[1] |
+| 110060 | The House Always Wins | Pgl200 | 20 |  |  | Complete |
 | 110061 | Here There Be Pirates | Pgl300 | 30 |  |  |  |
 | 110062 | Two Sides to Every Chip | Pgl306 | 36 |  |  |  |
 | 110080 | All Bark and No Bite | Gla200 | 20 |  |  |  |
@@ -94,50 +94,50 @@ List of Quests in FFXIV 1.23b. Each page holds specific notes and information. T
 | 110544 | Small Talk | Dftsrt |  |  |  | System |
 | 110545 | Small Talk | Dftlak |  |  |  | System |
 | 110627 | "Ifrit Bleeds, We Can Kill It" | Sum6a0 | 45 |  |  |  |
-| 110633 | Assessing the Damage | Etc1l0 | 20 | 0 |  | Complete[2] X |
-| 110634 | Bridging the Gap | Etc1l1 | 10 | 0 |  | Complete[2] X |
+| 110633 | Assessing the Damage | Etc1l0 | 20 | 0 |  | Complete X |
+| 110634 | Bridging the Gap | Etc1l1 | 10 | 0 |  | Complete X |
 | 110636 | Revenge on the Reavers | Etc1l3 | 45 | 0 |  |  |
-| 110638 | Till Death Do Us Part | Etc1l5 | 20 | 0 |  | Complete[2] X |
-| 110639 | Beryl Overboard | Etc1l6 | 20 | 110638 |  | Complete[2] X |
-| 110640 | Have You Seen My Son | Etc1l7 | 30 | 0 |  | Complete[2] X |
+| 110638 | Till Death Do Us Part | Etc1l5 | 20 | 0 |  | Complete X |
+| 110639 | Beryl Overboard | Etc1l6 | 20 | 110638 |  | Complete X |
+| 110640 | Have You Seen My Son | Etc1l7 | 30 | 0 |  | Complete X |
 | 110641 | Food for Thought | Etc1l8 | 20 | 0 |  | Complete |
 | 110642 | Seashells by the Seashore | Etc1l9 | 20 | 0 |  |  |
 | 110643 | Fishing for Answers | Etc2l0 | 25 |  |  | Complete X |
 | 110644 | Moonstruck | Etc2l1 | 20 |  |  |  |
-| 110646 | A Misty Past | Etc2l3 | 17 |  |  | Complete[3] |
+| 110646 | A Misty Past | Etc2l3 | 17 |  |  | Complete |
 | 110648 | Carving a Name | Etc2l5 | 47 |  |  |  |
 | 110653 | The Tug of the Whorl | Etc3l0 | 5 |  |  | Complete |
 | 110654 | Proceed with Caution | Etc1g0 | 10 | 0 |  | In Progress |
 | 110655 | Playing with Fire | Etc1g1 | 15 | 0 |  | In Progress |
-| 110656 | A Well-Balanced Diet | Etc1g2 | 25 | 0 |  | Complete[2] X |
-| 110658 | The Penultimate Prank | Etc1g4 | 30 | 0 |  | Complete[2] X |
-| 110659 | The Search for Sicksa | Etc1g5 | 10 | 0 |  | Complete[2] X |
-| 110660 | The Ultimate Prank | Etc1g6 | 35 | 110658 |  | Complete[2] X |
-| 110662 | Say it with Wolf Tails | Etc1g8 | 30 | 110640 |  | Complete[2] X |
-| 110663 | Embarrassing Excerpts | Etc1g9 | 30 | 0 |  | Complete[2] X |
-| 110664 | A Forbidden Love | Etc2g0 | 30 | 110663 |  | Complete[2] X |
-| 110665 | Last Respects | Etc2g1 | 40 | 0 |  | Complete[2] X |
-| 110666 | Stone Deaf | Etc2g2 | 18 | 0 |  | Complete[2] X |
+| 110656 | A Well-Balanced Diet | Etc1g2 | 25 | 0 |  | Complete X |
+| 110658 | The Penultimate Prank | Etc1g4 | 30 | 0 |  | Complete X |
+| 110659 | The Search for Sicksa | Etc1g5 | 10 | 0 |  | Complete X |
+| 110660 | The Ultimate Prank | Etc1g6 | 35 | 110658 |  | Complete X |
+| 110662 | Say it with Wolf Tails | Etc1g8 | 30 | 110640 |  | Complete X |
+| 110663 | Embarrassing Excerpts | Etc1g9 | 30 | 0 |  | Complete X |
+| 110664 | A Forbidden Love | Etc2g0 | 30 | 110663 |  | Complete X |
+| 110665 | Last Respects | Etc2g1 | 40 | 0 |  | Complete X |
+| 110666 | Stone Deaf | Etc2g2 | 18 | 0 |  | Complete X |
 | 110667 | Hunting the Hunters | Etc2g3 | 24 | 0 |  |  |
 | 110668 | To Deskunk A Beer | Etc2g4 | 31 | 0 |  |  |
 | 110669 | Losing One's Thread | Etc2g5 | 25 | 0 |  |  |
 | 110674 | Seeing the Seers | Etc3g0 | 5 | 0 |  | Complete |
-| 110675 | A Knock in the Night | Etc1u0 | 35 | 0 |  | Complete[2] X |
-| 110676 | Sleepless in Eorzea | Etc1u1 | 10 | 0 |  | Complete[2] X |
-| 110677 | Dressed to Be Killed | Etc1u2 | 45 | 0 |  | Complete[2] X |
-| 110679 | The Customer Comes First | Etc1u4 | 30 | 0 |  | Complete[2] X |
-| 110680 | An Inconvenient Dodo | Etc1u5 | 15 | 0 |  | Complete[2] X |
-| 110681 | Besmitten and Besmirched | Etc1u6 | 15 | 0 |  | Complete[2] X |
+| 110675 | A Knock in the Night | Etc1u0 | 35 | 0 |  | Complete X |
+| 110676 | Sleepless in Eorzea | Etc1u1 | 10 | 0 |  | Complete X |
+| 110677 | Dressed to Be Killed | Etc1u2 | 45 | 0 |  | Complete X |
+| 110679 | The Customer Comes First | Etc1u4 | 30 | 0 |  | Complete X |
+| 110680 | An Inconvenient Dodo | Etc1u5 | 15 | 0 |  | Complete X |
+| 110681 | Besmitten and Besmirched | Etc1u6 | 15 | 0 |  | Complete X |
 | 110682 | Clasping to Hope | Etc1u7 | 34 | 0 |  |  |
 | 110683 | Traumaturgy | Etc1u8 | 36 | 110682 |  |  |
 | 110684 | Best Flower Ever | Etc1u9 | 10 | 0 |  |  |
 | 110685 | The Unheard Horizon | Etc2u0 | 20 |  |  |  |
-| 110686 | Freedom Isn't Free | Etc2u1 | 32 |  |  | Complete[2] X |
-| 110687 | Ore for an Ore | Etc2u2 | 28 |  |  | Complete[2] X |
+| 110686 | Freedom Isn't Free | Etc2u1 | 32 |  |  | Complete X |
+| 110687 | Ore for an Ore | Etc2u2 | 28 |  |  | Complete X |
 | 110690 | No Other Dodo Will Do | Etc2u5 | 15 |  |  |  |
 | 110695 | A Call to Arms | Etc3u0 | 5 |  |  | Complete |
-| 110706 | Counting Sheep | Etc2i0 | 25 | 0 |  | Complete[2] X |
-| 110707 | A Hypocritical Oath | Etc2i1 | 25 |  |  | Complete[2] X |
+| 110706 | Counting Sheep | Etc2i0 | 25 | 0 |  | Complete X |
+| 110707 | A Hypocritical Oath | Etc2i1 | 25 |  |  | Complete X |
 | 110708 | Blood Price | Etc2i2 | 45 |  |  |  |
 | 110726 | Quid Pro Quo | Etc3u1 | 15 |  |  |  |
 | 110727 | There Might Be Blood | Etc3u2 | 21 |  |  |  |
@@ -150,17 +150,17 @@ List of Quests in FFXIV 1.23b. Each page holds specific notes and information. T
 | 110745 | Shot Through the Heart | Etc3l2 | 21 |  |  |  |
 | 110746 | What a Pirate Wants | Etc3l3 | 15 |  | All | Complete |
 | 110753 | Of Archons and Muses | Wld0u1 | 10 |  |  | Complete |
-| 110754 | Sanguine Studies | Wld0u2 | 27 |  |  | Complete[2] |
-| 110755 | Secrets Unearthed | Wld0u3 | 17 |  |  | Complete[2] |
-| 110756 | Rustproof | Wld0u4 | 28 | Sanguine Studies |  | Complete[2] |
-| 110762 | In the Name of Science | Wld0g1 | 10 | 0 |  | Complete[2] |
-| 110763 | Hearing Confession | Wld0g2 | 10 | 0 |  | Complete[3] |
-| 110764 | A Bitter Oil to Swallow | Wld0g3 | 17 | 0 |  | Complete[2] |
-| 110765 | Spores on the Brain | Wld0g4 | 11 | 110762 |  | Complete[2] |
+| 110754 | Sanguine Studies | Wld0u2 | 27 |  |  | Complete |
+| 110755 | Secrets Unearthed | Wld0u3 | 17 |  |  | Complete |
+| 110756 | Rustproof | Wld0u4 | 28 | Sanguine Studies |  | Complete |
+| 110762 | In the Name of Science | Wld0g1 | 10 | 0 |  | Complete |
+| 110763 | Hearing Confession | Wld0g2 | 10 | 0 |  | Complete |
+| 110764 | A Bitter Oil to Swallow | Wld0g3 | 17 | 0 |  | Complete |
+| 110765 | Spores on the Brain | Wld0g4 | 11 | 110762 |  | Complete |
 | 110771 | Trading Tongueflaps | Wld0l1 | 5 |  |  | Complete |
-| 110772 | Letting Out Orion's Belt | Wld0l2 | 10 |  |  | Complete[4] |
-| 110773 | Sour Grapes | Wld0l3 | 17 |  |  | Complete[3] |
-| 110774 | Sniffing Out a Profit | Wld0l4 | 37 |  |  | Complete[3] |
+| 110772 | Letting Out Orion's Belt | Wld0l2 | 10 |  |  | Complete |
+| 110773 | Sour Grapes | Wld0l3 | 17 |  |  | Complete |
+| 110774 | Sniffing Out a Profit | Wld0l4 | 37 |  |  | Complete |
 | 110789 | The Dreamer's Gospel (Ul'dah) | Spl0u1 | 5 |  |  |  |
 | 110790 | The Dreamer's Dilemma (Ul'dah) | Spl0u2 | 5 |  |  |  |
 | 110794 | The Dreamer's Gospel (Gridania) | Spl0g1 | 5 |  |  |  |
@@ -182,13 +182,13 @@ List of Quests in FFXIV 1.23b. Each page holds specific notes and information. T
 | 110818 | A Light in the Dark | Etc200 | 45 | 0 |  |  |
 | 110819 | What Glitters Always Isn't Gold | Etc201 | 45 | 0 |  |  |
 | 110828 | Waste Not Want Not | Etc5g0 | 1 | 2nd MSQ completed |  | Complete |
-| 110829 | In Plain Sight | Etc5g1 | 15 | The Usual Suspect |  | In Progress [3] |
+| 110829 | In Plain Sight | Etc5g1 | 15 | The Usual Suspect |  | In Progress |
 | 110838 | The Ink Thief | Etc5l0 | 1 | 2nd MSQ completed |  | Complete |
-| 110839 | Private Eyes | Etc5l1 | 15 | In Plain Sight |  | In Progress [3] |
+| 110839 | Private Eyes | Etc5l1 | 15 | In Plain Sight |  | In Progress |
 | 110840 | Mysteries of the Red Moon | Etc5l2 | 20 | 110839 |  | In Progress |
 | 110841 | Prophecy Inspection | Etc5l3 | 20 | 110840 |  | In Progress |
 | 110848 | Ring of Deceit | Etc5u0 | 1 | 2nd MSQ completed |  | Complete |
-| 110849 | The Usual Suspect | Etc5u1 | 15 | First inn quests done |  | In Progress [3] |
+| 110849 | The Usual Suspect | Etc5u1 | 15 | First inn quests done |  | In Progress |
 | 110858 | Seasonal Event | Spl000 | 1 |  |  |  |
 | 110859 | Scrambled Eggs | Spl101 | 1 |  |  |  |
 | 110860 | Bombard Backlash | Spl102 | 1 |  |  |  |
@@ -310,9 +310,3 @@ List of Quests in FFXIV 1.23b. Each page holds specific notes and information. T
 | 111832 | United We Stand (Ul'dah) | Gcu106 | 45 |  |  |  |
 | 111833 | To Kill a Raven (Ul'dah) | Gcu107 | 45 |  |  |  |
 | 111834 | "Mess with the Goat, Get the Horns" | Gcu702 | 50 |  |  |  |
-
- 
-1. ↑ 1.0 1.1 1.2 1.3 Waiting on Duty  
-2. ↑ 2.00 2.01 2.02 2.03 2.04 2.05 2.06 2.07 2.08 2.09 2.10 2.11 2.12 2.13 2.14 2.15 2.16 2.17 2.18 2.19 2.20 2.21 2.22 2.23 2.24 2.25 2.26 2.27 2.28 2.29 Waiting on Combat  
-3. ↑ 3.0 3.1 3.2 3.3 3.4 3.5 3.6 ENPC Missing  
-4. ↑ TextId Missing

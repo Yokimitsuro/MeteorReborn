@@ -168,6 +168,12 @@ class WikiHtmlParser(HTMLParser):
             "thumb",
             "thumbinner",
             "magnify",
+            # Reference / citation chrome: backlink arrows + reflist
+            "references",
+            "mw-references-wrap",
+            "mw-cite-backlink",
+            "reference",
+            "mw-headline-anchor",
         }
         skip_ids = {"siteSub", "contentSub", "catlinks", "jump-to-nav", "wm-ipp-base"}
         cls = attrs_d.get("class", "")
