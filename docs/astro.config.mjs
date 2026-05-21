@@ -40,10 +40,23 @@ export default defineConfig({
 					label: 'Architecture',
 					items: [
 						{ label: 'Overview', slug: 'architecture/overview' },
+						{ label: 'Codebase tour', slug: 'architecture/codebase-tour' },
 						{ label: 'Packet flow', slug: 'architecture/packet-flow' },
 						{ label: 'Database schema', slug: 'architecture/database' },
 						{ label: 'Lua engine', slug: 'architecture/lua' },
 						{ label: 'Port notes', slug: 'architecture/port-notes' },
+					],
+				},
+				{
+					label: 'Contributing',
+					items: [
+						{ label: 'How to help', slug: 'contributing/overview' },
+						{ label: 'Dev environment', slug: 'contributing/dev-setup' },
+						{ label: 'Code conventions', slug: 'contributing/conventions' },
+						{ label: 'Git workflow', slug: 'contributing/git-workflow' },
+						{ label: 'Recipes (add X)', slug: 'contributing/recipes' },
+						{ label: 'Debugging', slug: 'contributing/debugging' },
+						{ label: 'Roadmap', slug: 'contributing/roadmap' },
 					],
 				},
 				{
