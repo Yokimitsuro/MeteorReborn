@@ -1,448 +1,145 @@
 ---
-title: GM / Debug commands
-description: FFXIV 1.0 reference for Meteor Reborn.
+title: GM commands
+description: All GM/debug commands shipped in data/scripts/commands/gm/ and how to use them.
 ---
 
-*Updated as of commit 38014f8(2016-08-19)* 
-
-The following commands are available as part of the Project Meteor Server. 
- They can be used by typing their usage examples into the chat box within the game. 
-
- 
-
-### Standard commands
-
- 
-
-#### help
-
- 
-
-    
-| help | Prints out a list of available commands |
-|---|---|
-| Usage | !help |
-| !help <command> |  |
-
- 
-
-  
-| Parameters |  |
-|---|---|
-| <command> | Brings up the help description for the given command |
-
- 
-
- 
-
- 
-
-#### mypos
-
- 
-
-  
-| mypos | Prints out your absolute location in the current region |
-|---|---|
-| Usage | !mypos |
-
- 
-
- 
-
- 
-
-#### music
-
- 
-
-  
-| music | Plays music <id> to player |
-|---|---|
-| Usage | !music <id> |
-
- 
-
-  [](/MeteorReborn/world/music/)
-| Parameters |  |
-|---|---|
-| <id> | Plays the music defined at <id>. Refer to Music for a list of IDs |
-
- 
-
- 
-
- 
-
-#### warp
-
- 
-
-    
-| warp | Warp to a location from a list, or enter a <zone> with coordinates <x> <y> <z> |
-|---|---|
-| Usage | !warp <spawn list> |
-| !warp <zone> <x> <y> <z> |  |
-| !warp <zone> <x> <y> <z> <privateArea> <targetname> |  |
-
- 
-
-   [](/MeteorReborn/world/regions/)     
-| Parameters |  |
-|---|---|
-| <spawn list> | The ID from the list of locations as defined in server_zones_spawnlocations in the database |
-| <zone> | Value of the zone to head to.  Refer to Regions for the list of zone IDs |
-| <X> | X Position |
-| <Y> | Y Position |
-| <Z> | Z Position |
-| <privateArea> | Warp into a defined private area of a given zone ID |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
- 
-
- 
-
-#### nudge
-
- 
-
-    
-| nudge | Positions your character forward a set <distance>, defaults to 5 units |
-|---|---|
-| Usage | !nudge |
-| !nudge <distance> |  |
-| !nudge <distance> <up/down> |  |
-
- 
-
-   
-| Parameters |  |
-|---|---|
-| <distance> | The amount of units to move forward |
-| <up/down> | Nudge vertically instead.  Up, U, or +, for moving up.  Down, D, or -, for moving down |
-
- 
-
-#### speed
-
- 
-
-    
-| speed | Set movement speed for player. Enter no value to reset to default |
-|---|---|
-| Usage | !speed |
-| !speed <run> |  |
-| !speed <stop> <walk> <run> |  |
-
- 
-
-    
-| Parameters |  |
-|---|---|
-| <stop> | Stationary speed (does nothing for players) |
-| <walk> | Walking speed |
-| <run> | Running speed |
-
- 
-
- 
-
- 
-
-### Server Administration commands
-
- 
-
-#### giveitem
-
- 
-
-    
-| giveitem | Adds <item> <qty> to <location> for player or <targetname> |
-|---|---|
-| Usage | !giveitem <item> <qty> |
-| !giveitem <item> <qty> <location> |  |
-| !giveitem <item> <qty> <location> <targetname> |  |
-
- 
-
-    
- 
-| Parameters |  |
-|---|---|
-| <item> | Item ID to give, as defined in xtx_itemName |
-| <qty> | Quantity of item to add |
-| <location> | Inventory location to go into (eg, Bag, Key Item, Loot, Currency) as defined in global.lua from the scripts folder.  Defaults to INVENTORY_COMMON |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
-#### givegil
-
- 
-
-   
-| givegil | Adds gil <qty> to player or <targetname> |
-|---|---|
-| Usage | !givegil <qty> |
-| !givegil <qty> <targetname> |  |
-
- 
-
-   
-| Parameters |  |
-|---|---|
-| <qty> | Quantity of gil to add |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
- 
-
- 
-
-#### givecurrency
-
- 
-
-   
-| givecurrency | Adds <item> to currency by amount <qty> to player or <targetname> |
-|---|---|
-| Usage | !givecurrency <item> <qty> |
-| !givecurrency <item> <qty> <targetname> |  |
-
- 
-
-    
-| Parameters |  |
-|---|---|
-| <item> | Item ID to give, as defined in xtx_itemName |
-| <qty> | Quantity of item to add |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
- 
-
- 
-
-#### givekeyitem
-
- 
-
-   
-| givekeyitem | Adds <keyitem> to player or <targetname> |
-|---|---|
-| Usage | !giveitem <keyitem> |
-| !giveitem <keyitem> <target name> |  |
-
- 
-
-   
-| Parameters |  |
-|---|---|
-| <keyitem> | Item ID to give, as defined in xtx_itemName |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
-#### delitem
-
- 
-
-    
-| delitem | Removes <item> <qty> from <location> for player or <targetname> |
-|---|---|
-| Usage | !delitem <item> <qty> |
-| !delitem <item> <qty> <location> |  |
-| !delitem <item> <qty> <location> <targetname> |  |
-
- 
-
-    
- 
-| Parameters |  |
-|---|---|
-| <item> | Item ID to remove, as defined in xtx_itemName |
-| <qty> | Quantity of item to remove |
-| <location> | Inventory location to remove from (eg, Bag, Key Item, Loot, Currency) as defined in global.lua from the scripts folder.  Defaults to INVENTORY_COMMON |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
- 
-
- 
-
-#### delcurrency
-
- 
-
-   
-| delcurrency | Removes currency <qty> from player or <targetname> |
-|---|---|
-| Usage | !delcurrency <item> <qty> |
-| !delcurrency <item> <qty> <targetname> |  |
-
- 
-
-    
-| Parameters |  |
-|---|---|
-| <item> | Item ID to give, as defined in xtx_itemName |
-| <qty> | Quantity of item to add |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
- 
-
- 
-
-#### delkeyitem
-
- 
-
-   
-| delkeyitem | Removes <keyitem> from player or <targetname> |
-|---|---|
-| Usage | !delkeyitem <keyitem> |
-| !delkeyitem <keyitem> <target name> |  |
-
- 
-
-   
-| Parameters |  |
-|---|---|
-| <keyitem> | Item ID to remove, as defined in xtx_itemName |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
-#### weather
-
- 
-
-    
-| weather | Change the weather client-side to <id> and optional <transition> for player |
-|---|---|
-| Usage | !weather <id> |
-| !weather <id> <transition> |  |
-| !weather <id> <transition> <zonewide> |  |
-
- 
-
-  [](/MeteorReborn/world/weather/)  
-| Parameters |  |
-|---|---|
-| <id> | Changes to the weather defined at <id>. Refer to Weather  for a list of IDs |
-| <transition> | Fades from the current weather effect to the next one, in seconds |
-| <zonewide> | Sets the weather change to every player within the same zone |
-
- 
-
-### Debug commands
-
- 
-
-#### endevent
-
- 
-
-   
-| endevent | Passes endEvent() to player or <targetname> to close a script |
-|---|---|
-| Usage | !endevent |
-| !endevent <targetname> |  |
-
- 
-
-  
-| Parameters |  |
-|---|---|
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
-#### sendpacket
-
- 
-
-   
-| sendpacket | Sends a custom <packet> to player or <targetname> |
-|---|---|
-| Usage | !sendpacket <packet> |
-| !sendpacket <packet> <targetname> |  |
-
- 
-
-  `` 
-| Parameters |  |
-|---|---|
-| <packet> | Filename of the packet to look for from within a folder named packets in the Map Server directory |
-| <targetname> | Name of player to select remotely. Two words, firstname & lastname, separated by a space |
-
- 
-
-#### graphic
-
- 
-
-  
-| graphic | Changes appearance for equipment with given parameters |
-|---|---|
-| Usage | !graphic <slot> <wID> <eID> <vID> <cID> |
-
- 
-
-      
-| Parameters |  |
-|---|---|
-| <slot> | Slot type |
-| <wID> | Weapon type |
-| <eID> | Equipment type |
-| <vID> | Variant type |
-| <cID> | Color type |
-
- 
-
- ********************                            
-|  |  |  |  |  |
-|---|---|---|---|---|
-| slot | weaponID | equipID | variantID | colorID |
-| 0 - ??? | ??? | Height? | ??? | ??? |
-| 1 – Colors | EyeColor | HairColor | SkinColor | ?? |
-| 2 – Head? | ??? | FaceType/Eyes | FacialFeatures | ??? |
-| 3 – Hair | ??? | HairStyle | Highlight | ??? |
-| 4 - ??? |  |  |  |  |
-| 5 - MainHand | Model | SubType | Variant | Color Where Applicable |
-| 6 - OffHand | Model | SubType | Variant | Color Where Applicable |
-| 7 - Special Mainhand | Model | SubType | Variant | Color Where Applicable |
-| 8 - Special Offhand | Model | SubType | Variant | Color Where Applicable |
-| 9 - Throwing | Model | SubType | Variant | Color Where Applicable |
-| 10 - Pack | Model | SubType | Variant | Color Where Applicable |
-| 11 - Pouch | Model | SubType | Variant | Color Where Applicable |
-| 12 - Head | ??? | Model | Variant | Color Where Applicable |
-| 13  - Body | ??? | Model | Variant | Color Where Applicable |
-| 14 - Legs | ??? | Model | Variant | Color Where Applicable |
-| 15 - Hands | ??? | Model | Variant | Color Where Applicable |
-| 16 - Feet | ??? | Model | Variant | Color Where Applicable |
-| 17 - Belt | ??? | Model | Variant |  |
-| 18 - Neck | ??? | Model | ??? | ??? |
-| 19 - Right Ear | ??? | Model | ??? | ??? |
-| 20 - Left Ear | ??? | Model | ??? | ??? |
-| 21 - Right Wrist | ??? | Model | ??? | ??? |
-| 22 - Left Wrist | ??? | Model | ??? | ??? |
-| 23 - Right Ring #1 | ??? | Model | ??? | ??? |
-| 24 - Left Ring #1 | ??? | Model | ??? | ??? |
-| 25 - Right Ring #2 | ??? | Model | ??? | ??? |
-| 26 - Left Ring #2 | ??? | Model | ??? | ??? |
-| 27 - ??? |  |  |  |  |
-
- 
-- Warning: Improper weapon combinations/objects placed in slots 5 and/or 6 can crash the game. Ex. Dual-wielding swords.
- 
-
-[Kyne's list of IDs](20231222212124/https://docs.google.com/spreadsheets/d/1VPLeavtXps31guP0ADXTsTTjX4eMK-VwrvDug7kHVso/edit#gid=370822967) [Paru's list of IDs](20231222212124/https://docs.google.com/document/d/1DJq3fp-3omlZ4Bsejd5tPhAb3ZvYczdVpSZO4QGWG3Y/edit?usp=sharing)
+GM commands are Lua scripts in `data/scripts/commands/gm/`. Typing `!<name>`
+in the in-game chat (or via the map server's stdin in native mode) routes to
+the matching `<name>.lua`.
+
+The `CommandProcessor` (in `src/MeteorReborn.Map/CommandProcessor.cs`) strips
+the leading `!`, looks up the file, parses parameters according to the script's
+`parameters` field (`"d"` = decimal, `"s"` = string, `"ds"` = int + string, ...)
+and calls its `onTrigger(player, argc, ...)` entry point.
+
+## Commands shipped with Meteor Reborn
+
+### World & teleport
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!warp` | `<zoneId> <x> <y> <z>` | Teleport to coords in another zone |
+| `!warpid` | `<zoneId>` | Warp to a zone's default spawn |
+| `!warpplayer` | `<playerName> <zoneId>` | Warp another player |
+| `!mypos` | — | Echo current x/y/z/rotation/zoneId |
+| `!nudge` | `<distance>` | Move yourself forward N yalms |
+| `!nudgenpc` | `<actorId> <distance>` | Move an NPC forward |
+| `!setpopulacepos` | `<populaceUniqueId> <x> <y> <z>` | Move a populace NPC |
+| `!reloadzone` | — | Re-spawn all NPCs in your current zone |
+| `!zonecount` | — | Total zones loaded |
+| `!speed` | `<stop> <walk> <run> <active>` | Override movement speeds |
+
+### Spawning
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!spawn` | `<actorClassId> [w] [h]` | Spawn a battle NPC at your position; w/h create a grid |
+| `!spawnnpc` | `<actorClassId>` | Spawn a populace NPC |
+| `!despawn` | `<actorId>` | Despawn the given actor |
+| `!changetonpc` | `<actorClassId>` | Disguise yourself as the given NPC class |
+| `!setappearance` | `<modelId>` | Change your model |
+| `!setsize` | `<scale>` | Resize self (1.0 = normal) |
+| `!setstate` | `<mainState>` | Change actor state (e.g. crouched, dead) |
+| `!setnpcls` | `<value>` | Set NPC linkshell visibility |
+
+### Combat & stats
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!setmaxhp` | `<hp>` | Set your max HP |
+| `!setmaxmp` | `<mp>` | Set your max MP |
+| `!settp` | `<tp>` | Set your current TP |
+| `!setmod` | `<modifierId> <value>` | Set a Modifier (Attack, Defense, ...) |
+| `!setjob` | `<jobId>` | Change current job/class |
+| `!giveexp` | `<amount>` | Award EXP to current job |
+| `!ba` | — | Toggle a test battle scenario |
+| `!testbnpckill` | — | Spawn + auto-kill a battle NPC for testing |
+| `!vdragon` | — | Spawn a test wyrm encounter |
+
+### Inventory & currency
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!giveitem` | `<itemId> [qty] [quality]` | Add item to your bag |
+| `!delitem` | `<itemId>` | Remove an item |
+| `!givekeyitem` | `<keyItemId>` | Add a key item |
+| `!delkeyitem` | `<keyItemId>` | Remove a key item |
+| `!givegil` | `<amount>` | Add gil |
+| `!givecurrency` | `<currencyId> <amount>` | Add currency (GC seals, ...) |
+| `!delcurrency` | `<currencyId> <amount>` | Remove currency |
+| `!equipactions` | — | Auto-equip default actions for current job |
+
+### Quests & content
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!quest` | `<questId>` | Start a quest |
+| `!addquest` | `<questId>` | Add to active list |
+| `!completedQuest` | `<questId>` | Mark a quest as completed |
+| `!addguildleve` | `<leveId>` | Add a leve |
+| `!removeguildleve` | `<leveId>` | Remove a leve |
+| `!eaction` | `<id>` | Trigger an event action |
+| `!effect` | `<id>` | Apply a status effect |
+| `!endevent` | — | Force-end current event scene |
+| `!playanimation` | `<animId>` | Play an animation on yourself |
+| `!anim` | `<animId>` | Same as `playanimation` |
+| `!animhex` | `<hexAnimId>` | Play an animation by hex code |
+| `!graphic` | `<slot> <modelId>` | Force a graphic slot to a model |
+
+### Environment
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!weather` | `<weatherId>` | Force weather in current zone |
+| `!music` | `<musicId> [mode]` | Force background music |
+| `!menuman` | — | Toggle the populace menu management dialog |
+
+### Debug / internals
+
+| Command | Args | What it does |
+|---------|------|--------------|
+| `!getinfo` | `<actorId>` | Dump everything we know about an actor |
+| `!sendpacket` | `<opcode> <hexbytes>` | Manually craft and send a packet |
+| `!setproc` | `<procName> <value>` | Set a `proc` flag |
+| `!workvalue` | `<idx> <value>` | Set a `playerWork` slot |
+| `!test` | — | Reserved for ad-hoc testing |
+| `!testmapobj` | — | Spawn a test map object |
+| `!testpopulace` | — | Spawn a test populace NPC |
+| `!yolo` | — | Apply a stack of buffs/debuffs for chaos testing |
+| `!addtoparty` | `<playerName>` | Force-add player to your party |
+
+## Lua script structure
+
+Each command is a self-contained script. Minimal template:
+
+```lua
+require("global");
+
+properties = {
+    permissions = 0,
+    parameters = "d",            -- "d"=decimal, "s"=string, "ds"=int+string
+    description = "What this command does.",
+}
+
+function onTrigger(player, argc, firstArg)
+    if (firstArg == nil) then
+        player:SendMessage(0x20, "", "Usage: !mycmd <arg>");
+        return;
+    end
+    -- ... do work
+    player:SendMessage(0x20, "", "Done.");
+end;
+```
+
+`permissions` is read but **not currently enforced** — any `!`-prefixed message
+fires the matching command if it exists. A future change should compare to a
+GM rank stored in the `users` table.
+
+## Adding a new command
+
+1. Drop `mycmd.lua` in `data/scripts/commands/gm/`
+2. Restart map (`docker compose restart map`) — file index is built at startup
+3. Type `!mycmd` in chat — output goes to the chat window via `SendMessage`
+
+If you only edit an existing command, **no restart** is needed — the script is
+re-read on each invocation.
