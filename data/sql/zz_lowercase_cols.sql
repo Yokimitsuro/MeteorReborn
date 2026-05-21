@@ -407,3 +407,34 @@ ALTER TABLE "servers" RENAME COLUMN "listPosition" TO listposition;
 ALTER TABLE "supportdesk_faqs" RENAME COLUMN "languageCode" TO languagecode;
 ALTER TABLE "supportdesk_tickets" RENAME COLUMN "isOpen" TO isopen;
 ALTER TABLE "supportdesk_tickets" RENAME COLUMN "langCode" TO langcode;
+
+-- New tables added 2026-05-22 (alt PM import)
+ALTER TABLE "gamedata_quests" RENAME COLUMN "questName" TO questname;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "className" TO classname;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "minLevel" TO minlevel;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "minGCRank" TO mingcrank;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "gcAffiliation" TO gcaffiliation;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "expReward" TO expreward;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "gilReward" TO gilreward;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward1" TO itemreward1;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward1Qty" TO itemreward1qty;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward2" TO itemreward2;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward2Qty" TO itemreward2qty;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward3" TO itemreward3;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward3Qty" TO itemreward3qty;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward4" TO itemreward4;
+ALTER TABLE "gamedata_quests" RENAME COLUMN "itemReward4Qty" TO itemreward4qty;
+
+ALTER TABLE "server_eventnpc_mapobj" RENAME COLUMN "layoutId" TO layoutid;
+ALTER TABLE "server_eventnpc_mapobj" RENAME COLUMN "instanceId" TO instanceid;
+
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "actorClassId" TO actorclassid;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "uniqueId" TO uniqueid;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "zoneId" TO zoneid;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "privateAreaName" TO privateareaname;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "privateAreaLevel" TO privatearealevel;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "positionX" TO positionx;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "positionY" TO positiony;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "positionZ" TO positionz;
+ALTER TABLE "server_eventnpc_spawn_locations" RENAME COLUMN "motionPack" TO motionpack;
+ALTER TABLE "server_zones_privateareas" RENAME COLUMN "canExitArea" TO canexitarea;

@@ -1,0 +1,68 @@
+---
+title: Meteor Reborn
+description: FFXIV 1.0 (1.23b) server emulator — port of Project Meteor to .NET 10 + PostgreSQL + Docker.
+template: splash
+hero:
+  tagline: A modern revival of Project Meteor — bring FINAL FANTASY XIV 1.0 (1.23b) back online with .NET 10, PostgreSQL and Docker.
+  actions:
+    - text: Get started
+      link: /MeteorReborn/getting-started/overview/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/Yokimitsuro/MeteorReborn
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## What is Meteor Reborn?
+
+Meteor Reborn revives [Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server),
+the FFXIV 1.0 server emulator abandoned in 2019, on a modern stack. One
+`docker compose up` brings up four services (login HTTP, lobby, world, map)
+backed by a PostgreSQL database. A WPF launcher detects your installed FFXIV
+client and patches it to 1.23b before connecting.
+
+<CardGrid>
+	<Card title="Quick start" icon="rocket">
+		Five-minute setup with Docker. [Open guide →](/MeteorReborn/getting-started/docker/)
+	</Card>
+	<Card title="Architecture" icon="puzzle">
+		How lobby, world and map fit together. [Read →](/MeteorReborn/architecture/overview/)
+	</Card>
+	<Card title="Wire format" icon="document">
+		Opcodes, packet headers, ZIPATCH structure. [Reference →](/MeteorReborn/reference/game-opcodes/)
+	</Card>
+	<Card title="Contribute" icon="seti:github">
+		Onboarding, code conventions, recipes for adding features. [Start here →](/MeteorReborn/contributing/overview/)
+	</Card>
+</CardGrid>
+
+## This site is also the dev reference
+
+These docs are the same source of truth we use day-to-day:
+
+- [Codebase tour](/MeteorReborn/architecture/codebase-tour/) — where every piece of behavior lives in `src/`
+- [Code conventions](/MeteorReborn/contributing/conventions/) — the PM-COMPLETE / FINISH-PM / LANG-ADAPT system
+- [Recipes](/MeteorReborn/contributing/recipes/) — copy-pasteable patterns for adding GM commands, packet handlers, Lua NPCs, SQL imports
+- [Debugging](/MeteorReborn/contributing/debugging/) — common failure modes and their fixes
+- [Roadmap](/MeteorReborn/contributing/roadmap/) — where the project is going
+
+## Status
+
+This is alpha software. The base flow works (login, character creation, world
+connect) but zone-in is incomplete and PM's SQL dumps ship sparse content —
+only 7 monster spawn locations out of the box. See the
+[port notes](/MeteorReborn/architecture/port-notes/) and
+[unfinished content](/MeteorReborn/project/unfinished-content/) for details.
+
+## Credits
+
+Built on the shoulders of:
+
+- **[Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server)** — original server codebase (AGPL-3.0).
+- **[Seventh Umbral Launcher](https://github.com/jpd002/SeventhUmbral)** — reference for the ZIPATCH format.
+
+FINAL FANTASY XIV is © SQUARE ENIX. This is an educational server emulator.
+No client content is redistributed.

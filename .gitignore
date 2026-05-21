@@ -9,6 +9,16 @@
 *.userprefs
 *.dotsettings.user
 
+# --- Astro / Starlight docs site ---
+docs/node_modules/
+docs/dist/
+docs/.astro/
+docs/.wiki_cache/
+
+# --- Python ---
+**/__pycache__/
+*.pyc
+
 # --- Generated / cache ---
 # 5GB de patches descargados por el launcher: NO subir
 data/clientPatch/**/*.patch
