@@ -1,11 +1,7 @@
 ---
 title: Music
-description: Mirrored from the FFXIV Classic Wiki for offline reference.
+description: FFXIV 1.0 reference for Meteor Reborn.
 ---
-
-:::note[Source]
-This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Music). Original authors retain credit; reproduced here because the upstream wiki is intermittently offline.
-:::
 
 Music List                                                                                                                
 | Music ID | Name | Usage |
@@ -133,17 +129,17 @@ Majority of usage descriptions sourced from - [http://finalfantasy.wikia.com/wik
 #### Personal tools
 
   
-- [Log in](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Special:UserLogin&returnto=Music) 
+- Log in 
     
 
 #### Namespaces
 
   
 - [Page](/MeteorReborn/world/music/) 
-- [Discussion](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Talk:Music&action=edit&redlink=1) 
+- Discussion 
    
 
-#### Variants[](#)
+#### Variants
 
    
       
@@ -152,41 +148,41 @@ Majority of usage descriptions sourced from - [http://finalfantasy.wikia.com/wik
 
   
 - [Read](/MeteorReborn/world/music/) 
-- [View source](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Music&action=edit) 
-- [View history](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Music&action=history) 
+- View source 
+- View history 
    
 
-#### More[](#)
+#### More
 
    
     
 
 #### Search
 
-          [](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)  
+            
 
 #### Navigation
 
    
-- [Main page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)
-- [Recent changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChanges)
-- [Random page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:Random)
+- Main page
+- Recent changes
+- Random page
 - [Help](20231222212116/https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) 
     
 
 #### Tools
 
    
-- [What links here](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:WhatLinksHere/Music)
-- [Related changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChangesLinked/Music)
-- [Special pages](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:SpecialPages)
-- [Printable version](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Music&printable=yes)
-- [Permanent link](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Music&oldid=1196)
-- [Page information](20231222212116/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Music&action=info) 
+- What links here
+- Related changes
+- Special pages
+- Printable version
+- Permanent link
+- Page information 
        
 -  This page was last edited on 2 June 2021, at 02:09. 
   
-- [Privacy policy](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:Privacy_policy) 
-- [About FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:About) 
-- [Disclaimers](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:General_disclaimer) 
+- Privacy policy 
+- About FFXIV Classic Wiki 
+- Disclaimers 
     (window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.026","walltime":"0.029","ppvisitednodes":{"value":1,"limit":1000000},"ppgeneratednodes":{"value":4,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":1,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"timingprofile":["100.00% 0.000 1 -total"]},"cachereport":{"timestamp":"20231221214823","ttl":86400,"transientcontent":false}}});});(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":71});});

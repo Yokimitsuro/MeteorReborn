@@ -1,11 +1,7 @@
 ---
 title: Retail patcher & login flow
-description: Mirrored from the FFXIV Classic Wiki for offline reference.
+description: FFXIV 1.0 reference for Meteor Reborn.
 ---
-
-:::note[Source]
-This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Retail_Patcher_and_Login). Original authors retain credit; reproduced here because the upstream wiki is intermittently offline.
-:::
 
 Originally the retail version of the game used a built in patcher and login program to both update and start the game. The patcher consists of two programs ffxivboot.exe and ffxivupdater.exe. The login program is ffxivlogin.exe. Finally the actual game is ffxivgame.exe. 
 
@@ -297,17 +293,17 @@ The ffxivlogin program post-2012
 #### Personal tools
 
   
-- [Log in](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Special:UserLogin&returnto=Retail+Patcher+and+Login) 
+- Log in 
     
 
 #### Namespaces
 
   
 - [Page](/MeteorReborn/reference/retail-patcher/) 
-- [Discussion](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Talk:Retail_Patcher_and_Login&action=edit&redlink=1) 
+- Discussion 
    
 
-#### Variants[](#)
+#### Variants
 
    
       
@@ -316,41 +312,41 @@ The ffxivlogin program post-2012
 
   
 - [Read](/MeteorReborn/reference/retail-patcher/) 
-- [View source](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Retail_Patcher_and_Login&action=edit) 
-- [View history](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Retail_Patcher_and_Login&action=history) 
+- View source 
+- View history 
    
 
-#### More[](#)
+#### More
 
    
     
 
 #### Search
 
-          [](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)  
+            
 
 #### Navigation
 
    
-- [Main page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)
-- [Recent changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChanges)
-- [Random page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:Random)
+- Main page
+- Recent changes
+- Random page
 - [Help](20231222212123/https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) 
     
 
 #### Tools
 
    
-- [What links here](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:WhatLinksHere/Retail_Patcher_and_Login)
-- [Related changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChangesLinked/Retail_Patcher_and_Login)
-- [Special pages](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:SpecialPages)
-- [Printable version](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Retail_Patcher_and_Login&printable=yes)
-- [Permanent link](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Retail_Patcher_and_Login&oldid=836)
-- [Page information](20231222212123/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Retail_Patcher_and_Login&action=info) 
+- What links here
+- Related changes
+- Special pages
+- Printable version
+- Permanent link
+- Page information 
        
 -  This page was last edited on 6 June 2019, at 20:17. 
   
-- [Privacy policy](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:Privacy_policy) 
-- [About FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:About) 
-- [Disclaimers](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:General_disclaimer) 
+- Privacy policy 
+- About FFXIV Classic Wiki 
+- Disclaimers 
     (window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.045","walltime":"0.052","ppvisitednodes":{"value":85,"limit":1000000},"ppgeneratednodes":{"value":160,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"timingprofile":["100.00% 0.000 1 -total"]},"cachereport":{"timestamp":"20231222212235","ttl":86400,"transientcontent":false}}});});(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":176});});

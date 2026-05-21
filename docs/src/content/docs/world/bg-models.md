@@ -1,15 +1,11 @@
 ---
 title: BG objects
-description: Mirrored from the FFXIV Classic Wiki for offline reference.
+description: FFXIV 1.0 reference for Meteor Reborn.
 ---
-
-:::note[Source]
-This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/BgObj_Models). Original authors retain credit; reproduced here because the upstream wiki is intermittently offline.
-:::
 
 This is a list of all the various objects that the FFXIV 1.23b client contains. Contents of the below are located within <FFXIV install directory>/client/chara/bgobj/ . Some bgobj indices have multiple models within, nicknamed variants, located at /bgobj/<index>/equ/. 
 
-Each variant folder within is a multiplicative of 1024 dec (0x400 hex). For example, /equ/e008/ would be 8192 dec (0x2000 hex) if looking for actors that used that particular version of the model in the client table. Said variants are 'equipped' to the model, similar to players. So for example, top_mdl represents a body mesh which the majority of these use almost exclusively. You can change the appearance by equipping a different body slot in this instance via [Set Actor Appearance (x32)](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Game_Opcodes:Set_Actor_Appearance_(x32)), or finding an actor that exists which uses the different pieces as indicated in gamedata_actor_graphic 
+Each variant folder within is a multiplicative of 1024 dec (0x400 hex). For example, /equ/e008/ would be 8192 dec (0x2000 hex) if looking for actors that used that particular version of the model in the client table. Said variants are 'equipped' to the model, similar to players. So for example, top_mdl represents a body mesh which the majority of these use almost exclusively. You can change the appearance by equipping a different body slot in this instance via Set Actor Appearance (x32), or finding an actor that exists which uses the different pieces as indicated in gamedata_actor_graphic 
 
 All animations relating to bgobjs use the lib category (04 HEX) exclusively. 
 
@@ -254,17 +250,17 @@ All animations relating to bgobjs use the lib category (04 HEX) exclusively.
 #### Personal tools
 
   
-- [Log in](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Special:UserLogin&returnto=BgObj+Models) 
+- Log in 
     
 
 #### Namespaces
 
   
 - [Page](/MeteorReborn/world/bg-models/) 
-- [Discussion](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Talk:BgObj_Models&action=edit&redlink=1) 
+- Discussion 
    
 
-#### Variants[](#)
+#### Variants
 
    
       
@@ -273,41 +269,41 @@ All animations relating to bgobjs use the lib category (04 HEX) exclusively.
 
   
 - [Read](/MeteorReborn/world/bg-models/) 
-- [View source](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=BgObj_Models&action=edit) 
-- [View history](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=BgObj_Models&action=history) 
+- View source 
+- View history 
    
 
-#### More[](#)
+#### More
 
    
     
 
 #### Search
 
-          [](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)  
+            
 
 #### Navigation
 
    
-- [Main page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)
-- [Recent changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChanges)
-- [Random page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:Random)
+- Main page
+- Recent changes
+- Random page
 - [Help](20231222212111/https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) 
     
 
 #### Tools
 
    
-- [What links here](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:WhatLinksHere/BgObj_Models)
-- [Related changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChangesLinked/BgObj_Models)
-- [Special pages](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:SpecialPages)
-- [Printable version](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=BgObj_Models&printable=yes)
-- [Permanent link](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=BgObj_Models&oldid=1141)
-- [Page information](20231222212111/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=BgObj_Models&action=info) 
+- What links here
+- Related changes
+- Special pages
+- Printable version
+- Permanent link
+- Page information 
        
 -  This page was last edited on 27 February 2020, at 07:29. 
   
-- [Privacy policy](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:Privacy_policy) 
-- [About FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:About) 
-- [Disclaimers](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:General_disclaimer) 
+- Privacy policy 
+- About FFXIV Classic Wiki 
+- Disclaimers 
     (window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.101","walltime":"0.110","ppvisitednodes":{"value":1,"limit":1000000},"ppgeneratednodes":{"value":4,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":1,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"timingprofile":["100.00% 0.000 1 -total"]},"cachereport":{"timestamp":"20231221221515","ttl":86400,"transientcontent":false}}});});(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":99});});

@@ -1,11 +1,7 @@
 ---
 title: Points of interest
-description: Mirrored from the FFXIV Classic Wiki for offline reference.
+description: FFXIV 1.0 reference for Meteor Reborn.
 ---
-
-:::note[Source]
-This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Points_of_interest). Original authors retain credit; reproduced here because the upstream wiki is intermittently offline.
-:::
 
 ### Towns
 
@@ -519,17 +515,17 @@ This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragment
 #### Personal tools
 
   
-- [Log in](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Special:UserLogin&returnto=Points+of+interest) 
+- Log in 
     
 
 #### Namespaces
 
   
 - [Page](/MeteorReborn/world/points-of-interest/) 
-- [Discussion](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Talk:Points_of_interest&action=edit&redlink=1) 
+- Discussion 
    
 
-#### Variants[](#)
+#### Variants
 
    
       
@@ -538,41 +534,41 @@ This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragment
 
   
 - [Read](/MeteorReborn/world/points-of-interest/) 
-- [View source](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Points_of_interest&action=edit) 
-- [View history](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Points_of_interest&action=history) 
+- View source 
+- View history 
    
 
-#### More[](#)
+#### More
 
    
     
 
 #### Search
 
-          [](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)  
+            
 
 #### Navigation
 
    
-- [Main page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)
-- [Recent changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChanges)
-- [Random page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:Random)
+- Main page
+- Recent changes
+- Random page
 - [Help](20231222212113/https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) 
     
 
 #### Tools
 
    
-- [What links here](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:WhatLinksHere/Points_of_interest)
-- [Related changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChangesLinked/Points_of_interest)
-- [Special pages](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:SpecialPages)
-- [Printable version](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Points_of_interest&printable=yes)
-- [Permanent link](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Points_of_interest&oldid=1726)
-- [Page information](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Points_of_interest&action=info) 
+- What links here
+- Related changes
+- Special pages
+- Printable version
+- Permanent link
+- Page information 
        
 -  This page was last edited on 4 April 2022, at 01:02. 
   
-- [Privacy policy](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:Privacy_policy) 
-- [About FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:About) 
-- [Disclaimers](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:General_disclaimer) 
+- Privacy policy 
+- About FFXIV Classic Wiki 
+- Disclaimers 
     (window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.174","walltime":"0.234","ppvisitednodes":{"value":136,"limit":1000000},"ppgeneratednodes":{"value":142,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"timingprofile":["100.00% 0.000 1 -total"]},"cachereport":{"timestamp":"20231222212225","ttl":86400,"transientcontent":false}}});});(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":526});});

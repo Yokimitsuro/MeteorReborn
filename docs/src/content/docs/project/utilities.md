@@ -1,93 +1,87 @@
 ---
 title: Utilities
-description: Mirrored from the FFXIV Classic Wiki for offline reference.
+description: The Python and C# tools shipped under tools/ for development and content management.
 ---
 
-:::note[Source]
-This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Utilities). Original authors retain credit; reproduced here because the upstream wiki is intermittently offline.
-:::
+The `tools/` folder ships a small set of helpers used during development. All
+are self-contained and need no external services besides Python 3 and (for
+some) a running PostgreSQL.
 
-### FFXIVtool
+## `tools/MeteorReborn.Launcher/`
 
- 
--  [Main Site](20231222212115/http://cosmosa.jp/ffxivtool/) 
--  [Latest Version](20231222212115/http://cosmosa.jp/ffxivtool/ffxivtool13030100.zip)
- 
+The end-user launcher (Windows WPF, .NET 10). Detailed in
+[client setup](/MeteorReborn/getting-started/launcher/). Source files:
 
-### FFXIV Model Viewer
+| File | What it does |
+|------|--------------|
+| `MainWindow.xaml` / `.cs` | Login UI, settings, PLAY button |
+| `BlowfishCipher.cs` | FFXIV-specific Blowfish (same key schedule as PM) |
+| `GameLauncher.cs` | Spawns suspended `ffxivgame.exe`, patches memory at known RVAs, resumes |
+| `VersionChecker.cs` | Reads `<gamePath>/game.ver`, compares to target `2012.09.19.0001` |
+| `PatchFile.cs` | ZIPATCH parser (port of SeventhUmbral) — applies one `.patch` file |
+| `PatchManifest.cs` | Hardcoded list of 49 patches + expected sizes |
+| `PatchDownloader.cs` | HttpClient-based downloader with byte-level progress |
+| `Patcher.cs` | Two-phase pipeline: download missing, then apply in chronological order |
+| `PatcherWindow.xaml` / `.cs` | Modal progress UI (download + apply bars) |
 
- 
--  [Github](20231222212115/https://github.com/nohbdy/ffxivmodelviewer)
- 
+## `tools/sql_mysql_to_postgres.py`
 
-### Seventh Umbral Workshop
+MySQL → PostgreSQL SQL dump converter. Used to bring data from upstream PM
+dumps (HeidiSQL / mysqldump exports) into MR's Postgres schema.
 
- 
--  [Main Site](20231222212115/http://seventhumbral.org/downloads.php) 
--  [Latest Version](20231222212115/http://seventhumbral.org/downloads/workshop/sumworkshop-1.00.exe)
-           
+```bash
+python tools/sql_mysql_to_postgres.py input.sql output.sql
+```
 
-### Navigation menu
+Transforms applied:
 
-   
+- Strips HeidiSQL/mysqldump chrome (`/*! ... */` comments, `LOCK TABLES`,
+  `SET FOREIGN_KEY_CHECKS=0`, `COMMIT`, etc.)
+- `\` `→ `"` for identifier quoting (case-preserving)
+- Type mapping: `int(N) unsigned` → `bigint`, `tinyint(N)` → `smallint`, `bit` → `boolean`, `datetime` → `timestamp`
+- `REPLACE INTO` → `INSERT INTO`
+- `CREATE TABLE [IF NOT EXISTS]` → `DROP TABLE IF EXISTS x CASCADE; CREATE TABLE x`
+- Inline `KEY`/`UNIQUE KEY`/`CONSTRAINT` → commented out (Postgres uses separate `CREATE INDEX`)
+- MySQL escapes `\'` → `''`, `'0000-00-00'` → `NULL`
+- AUTO_INCREMENT, ENGINE=, DEFAULT CHARSET, COLLATE: stripped
 
-#### Personal tools
+## `tools/fetch_wiki.py`
 
-  
-- [Log in](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Special:UserLogin&returnto=Utilities) 
-    
+Bulk-downloads pages from a wiki source into HTML cache. Used to seed the
+docs site reference pages. Output is just raw HTML; conversion to Markdown is
+a separate step (`html_to_md.py`).
 
-#### Namespaces
+```bash
+python tools/fetch_wiki.py docs/.wiki_cache
+```
 
-  
-- [Page](/MeteorReborn/project/utilities/) 
-- [Discussion](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Talk:Utilities&action=edit&redlink=1) 
-   
+Sleeps 8s between requests to avoid rate limits. Skips files already cached
+(size > 5KB) so re-runs are cheap.
 
-#### Variants[](#)
+## `tools/html_to_md.py`
 
-   
-      
+Converts cached HTML pages to Starlight-flavored Markdown.
 
-#### Views
+```bash
+python tools/html_to_md.py docs/.wiki_cache docs/src/content/docs
+```
 
-  
-- [Read](/MeteorReborn/project/utilities/) 
-- [View source](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Utilities&action=edit) 
-- [View history](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Utilities&action=history) 
-   
+Behavior:
 
-#### More[](#)
+- Strips MediaWiki chrome (sidebar, edit links, navbox, archive.org banner)
+- Converts `<h1..h6>`, `<p>`, `<ul>`/`<ol>`, `<table>`, `<pre>`, `<code>`, `<a>`, `<strong>`/`<em>`
+- Maps known upstream page names to MR doc slugs via `PAGE_TO_SLUG`
+- **Strips all hyperlinks back to the upstream wiki or archive.org** — link text
+  is preserved as plain text. No content links out of the MR docs site
+- Emits Starlight frontmatter (title + description) per page
 
-   
-    
+## Tools not shipped (yet)
 
-#### Search
+Ideas worth implementing later:
 
-          [](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)  
-
-#### Navigation
-
-   
-- [Main page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)
-- [Recent changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChanges)
-- [Random page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:Random)
-- [Help](20231222212115/https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) 
-    
-
-#### Tools
-
-   
-- [What links here](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:WhatLinksHere/Utilities)
-- [Related changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChangesLinked/Utilities)
-- [Special pages](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:SpecialPages)
-- [Printable version](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Utilities&printable=yes)
-- [Permanent link](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Utilities&oldid=11)
-- [Page information](20231222212115/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Utilities&action=info) 
-       
--  This page was last edited on 4 October 2017, at 15:21. 
-  
-- [Privacy policy](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:Privacy_policy) 
-- [About FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:About) 
-- [Disclaimers](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:General_disclaimer) 
-    (window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.004","walltime":"0.013","ppvisitednodes":{"value":10,"limit":1000000},"ppgeneratednodes":{"value":16,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"timingprofile":["100.00% 0.000 1 -total"]},"cachereport":{"timestamp":"20231221223157","ttl":86400,"transientcontent":false}}});});(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":94});});
+- `tools/gen_battlenpc_spawns.py` — auto-generate `server_battlenpc_*` rows
+  from `gamedata_actor_class` + zone hints to populate more enemies than PM's 7
+- `tools/lua_lint.py` — static check for invalid Lua syntax or non-existent
+  C# member calls (would have caught `actor.SetAppearance(...)` before runtime)
+- `tools/opcode_diff.py` — compare MR's `PacketProcessor` switch cases against
+  client capture data to flag missing handlers

@@ -99,6 +99,7 @@ class WikiHtmlParser(HTMLParser):
         self.table_rows = []
         self.row_is_header = False
         self.current_href = None
+        self.link_text_buffer = None  # collects text inside <a>...</a>
         self.heading_level = 0
         self.heading_buffer = []
 
@@ -106,7 +107,9 @@ class WikiHtmlParser(HTMLParser):
 
     def _emit(self, s):
         if self.in_content and self.skip_depth == 0:
-            if self.heading_level:
+            if self.link_text_buffer is not None:
+                self.link_text_buffer.append(s)
+            elif self.heading_level:
                 self.heading_buffer.append(s)
             else:
                 self.out.append(s)
@@ -119,6 +122,18 @@ class WikiHtmlParser(HTMLParser):
         self._newline()
         if not (self.out and self.out[-1].endswith("\n\n")):
             self.out.append("\n")
+
+    def _strip_last_bracket(self):
+        """Remove the most recent emitted "[" (used when stripping a hyperlink)."""
+        for i in range(len(self.out) - 1, -1, -1):
+            if "[" in self.out[i]:
+                self.out[i] = self.out[i].rstrip()
+                if self.out[i].endswith("["):
+                    self.out[i] = self.out[i][:-1]
+                else:
+                    self.out[i] = self.out[i].rsplit("[", 1)
+                    self.out[i] = "[".join(self.out[i][:1]) + (self.out[i][1] if len(self.out[i]) > 1 else "")
+                return
 
     # ── tag handlers ─────────────────────────────────────────────────────────
 
@@ -194,7 +209,7 @@ class WikiHtmlParser(HTMLParser):
             self._emit("*")
         elif tag == "a":
             self.current_href = attrs_d.get("href", "")
-            self._emit("[")
+            self.link_text_buffer = []
         elif tag == "br":
             self._emit("\n")
         elif tag == "table":
@@ -275,23 +290,33 @@ class WikiHtmlParser(HTMLParser):
             self._emit("*")
         elif tag == "a":
             href = self.current_href or ""
+            text = "".join(self.link_text_buffer or [])
             self.current_href = None
+            self.link_text_buffer = None
+
             href_clean = href.split("/web/")[-1] if "/web/" in href else href
-            # Internal wiki links: rewrite to local slug if mapped, else upstream
+            # Decide what to emit. Rules:
+            #   1) Wiki internal link with a local slug mapping → /MeteorReborn/<slug>/
+            #   2) Wiki internal link without mapping → plain text (no URL)
+            #   3) Anything pointing at the upstream wiki or archive.org → plain text
+            #   4) Any other genuine external (github.com, etc.) → preserve
             m = re.search(r"index\.php/([^?#]+)", href_clean)
             if m:
                 page = m.group(1).rstrip("/")
                 slug = PAGE_TO_SLUG.get(page)
                 if slug:
-                    href_clean = f"/MeteorReborn/{slug}/"
+                    self._emit(f"[{text}](/MeteorReborn/{slug}/)")
                 else:
-                    href_clean = f"{UPSTREAM_BASE}/{page}"
+                    self._emit(text)
+            elif (
+                "fragmenterworks" in href_clean
+                or "web.archive.org" in href_clean
+                or href_clean.startswith("#")
+                or href_clean == ""
+            ):
+                self._emit(text)
             else:
-                # External link — keep as is
-                if href_clean.startswith("http://web.archive.org"):
-                    # Pure archive URL we can't decode — drop the prefix
-                    href_clean = re.sub(r"^https?://web\.archive\.org/web/\d+/", "", href_clean)
-            self._emit(f"]({href_clean})")
+                self._emit(f"[{text}]({href_clean})")
         elif tag == "table":
             self.in_table = False
             self._render_table()
@@ -376,13 +401,8 @@ def convert_one(html_path: Path, out_dir: Path, slug_root: Path):
     out_file.write_text(
         f"---\n"
         f"title: {title}\n"
-        f"description: Mirrored from the FFXIV Classic Wiki for offline reference.\n"
+        f"description: FFXIV 1.0 reference for Meteor Reborn.\n"
         f"---\n\n"
-        f":::note[Source]\n"
-        f"This page is mirrored from the [FFXIV Classic Wiki]"
-        f"({UPSTREAM_BASE}/{page}). Original authors retain credit; "
-        f"reproduced here because the upstream wiki is intermittently offline.\n"
-        f":::\n\n"
         f"{body}",
         encoding="utf-8",
     )
