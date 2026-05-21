@@ -1,0 +1,59 @@
+---
+title: Meteor Reborn
+description: FFXIV 1.0 (1.23b) server emulator — port of Project Meteor to .NET 10 + PostgreSQL + Docker.
+template: splash
+hero:
+  tagline: A modern revival of Project Meteor — bring FINAL FANTASY XIV 1.0 (1.23b) back online with .NET 10, PostgreSQL and Docker.
+  actions:
+    - text: Get started
+      link: /MeteorReborn/getting-started/overview/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/Yokimitsuro/MeteorReborn
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## What is Meteor Reborn?
+
+Meteor Reborn revives [Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server),
+the FFXIV 1.0 server emulator abandoned in 2019, on a modern stack. One
+`docker compose up` brings up four services (login HTTP, lobby, world, map)
+backed by a PostgreSQL database. A WPF launcher detects your installed FFXIV
+client and patches it to 1.23b before connecting.
+
+<CardGrid>
+	<Card title="Quick start" icon="rocket">
+		Five-minute setup with Docker. [Open guide →](/MeteorReborn/getting-started/docker/)
+	</Card>
+	<Card title="Architecture" icon="puzzle">
+		How lobby, world and map fit together. [Read →](/MeteorReborn/architecture/overview/)
+	</Card>
+	<Card title="Wire format" icon="document">
+		Opcodes, packet headers, ZIPATCH structure. [Reference →](/MeteorReborn/reference/game-opcodes/)
+	</Card>
+	<Card title="Contribute" icon="seti:github">
+		Issues, PRs, gitflow with `develop` + `master`. [GitHub →](https://github.com/Yokimitsuro/MeteorReborn)
+	</Card>
+</CardGrid>
+
+## Status
+
+This is alpha software. The base flow works (login, character creation, world
+connect) but zone-in is incomplete and PM's SQL dumps ship sparse content —
+only 7 monster spawn locations out of the box. See the
+[port notes](/MeteorReborn/architecture/port-notes/) and
+[unfinished content](/MeteorReborn/project/unfinished-content/) for details.
+
+## Credits
+
+Built on the shoulders of:
+
+- **[Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server)** — original server codebase (AGPL-3.0).
+- **[Seventh Umbral Launcher](https://github.com/jpd002/SeventhUmbral)** — reference for the ZIPATCH format.
+- **[FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)** — the bulk of the protocol/world reference material in these docs is mirrored from there.
+
+FINAL FANTASY XIV is © SQUARE ENIX. This is an educational server emulator.
+No client content is redistributed.

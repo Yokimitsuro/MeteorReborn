@@ -1,0 +1,38 @@
+---
+title: Meteor Reborn
+description: Emulador de servidor de FFXIV 1.0 (1.23b) — port de Project Meteor a .NET 10 + PostgreSQL + Docker.
+template: splash
+hero:
+  tagline: Revival moderno de Project Meteor — vuelve a FINAL FANTASY XIV 1.0 (1.23b) con .NET 10, PostgreSQL y Docker.
+  actions:
+    - text: Empezar
+      link: /MeteorReborn/es/getting-started/overview/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/Yokimitsuro/MeteorReborn
+      icon: external
+      variant: minimal
+---
+
+## ¿Qué es Meteor Reborn?
+
+Meteor Reborn revive [Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server),
+el emulador de servidor de FFXIV 1.0 abandonado en 2019, sobre un stack moderno.
+Un `docker compose up` levanta cuatro servicios (login HTTP, lobby, world, map)
+contra una base PostgreSQL. Un launcher WPF detecta tu cliente FFXIV instalado
+y lo parchea hasta 1.23b antes de conectar.
+
+:::note
+La traducción al español está en construcción. La versión completa está en
+[inglés](/MeteorReborn/). Las páginas en español se irán completando
+gradualmente.
+:::
+
+## Créditos
+
+- **[Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server)** — código base del servidor (AGPL-3.0).
+- **[Seventh Umbral Launcher](https://github.com/jpd002/SeventhUmbral)** — referencia del formato ZIPATCH.
+- **[FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)** — la mayor parte del material de referencia de protocolo/mundo viene mirroreado de ahí.
+
+FINAL FANTASY XIV es © SQUARE ENIX. Este es un emulador de servidor educacional.
+No se redistribuye contenido del cliente.

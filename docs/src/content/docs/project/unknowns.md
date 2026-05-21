@@ -1,0 +1,119 @@
+---
+title: Open questions / unknowns
+description: Mirrored from the FFXIV Classic Wiki for offline reference.
+---
+
+:::note[Source]
+This page is mirrored from the [FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Unknowns). Original authors retain credit; reproduced here because the upstream wiki is intermittently offline.
+:::
+
+An unorganized list of long-standing unknowns with the client. 
+
+ 
+
+ 
+
+#### Magitek Terminals
+
+ 
+
+    
+|  |  |
+|---|---|
+| Description | In instanced dungeons, these have a circular aura effect around them to signal where players need to stand for a period of time to activate it. |
+| Problem | Figuring out the trigger for this effect is unknown. |
+| Notes | BgObj model b936.  Textures for the effect appear packed along with each variation of the model.  Calling LIB animations does nothing for it other than the 'pulse' effect in the 3-9 range. |
+
+ 
+
+#### Linkshell/Company strings
+
+ 
+
+   
+
+|  |  |
+|---|---|
+| Description | There are GameMessages involving the name of a Linkshell or Company in its dialog. |
+| Problem | Sending an Invite or equipping an LS displays a "." in text. |
+| Notes | WorldMaster ids like 25131, 25150, and 25151 exhibit the issue.  In the sheets the LS/Company are called under [@STRING($EA(2))] or [@STRING($EB(49))].  $EA operator - We do not know what its function is or how to set values in the client for it to use.  $EB operator - calling values that far (eg. 15+) is unknown how to set since it's out of the luaParam range for SendGameMessage |
+
+ 
+
+#### Nameplate hidden when player is unable to move
+
+ 
+
+   
+|  |  |
+|---|---|
+| Description | During zone transitions into quest-related triggers on retail, the player nameplate is hidden until they're allowed to move again. |
+| Problem | This isn't replicated at present. |
+| Notes | Need to research for accuracy reasons. |
+
+           
+
+### Navigation menu
+
+   
+
+#### Personal tools
+
+  
+- [Log in](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Special:UserLogin&returnto=Unknowns) 
+    
+
+#### Namespaces
+
+  
+- [Page](/MeteorReborn/project/unknowns/) 
+- [Discussion](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Talk:Unknowns&action=edit&redlink=1) 
+   
+
+#### Variants[](#)
+
+   
+      
+
+#### Views
+
+  
+- [Read](/MeteorReborn/project/unknowns/) 
+- [View source](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Unknowns&action=edit) 
+- [View history](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Unknowns&action=history) 
+   
+
+#### More[](#)
+
+   
+    
+
+#### Search
+
+          [](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)  
+
+#### Navigation
+
+   
+- [Main page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Main_Page)
+- [Recent changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChanges)
+- [Random page](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:Random)
+- [Help](20231222212113/https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents) 
+    
+
+#### Tools
+
+   
+- [What links here](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:WhatLinksHere/Unknowns)
+- [Related changes](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:RecentChangesLinked/Unknowns)
+- [Special pages](http://ffxivclassic.fragmenterworks.com/wiki/index.php/Special:SpecialPages)
+- [Printable version](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Unknowns&printable=yes)
+- [Permanent link](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Unknowns&oldid=1788)
+- [Page information](20231222212113/http://ffxivclassic.fragmenterworks.com/wiki/index.php?title=Unknowns&action=info) 
+       
+-  This page was last edited on 5 December 2022, at 10:25. 
+  
+- [Privacy policy](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:Privacy_policy) 
+- [About FFXIV Classic Wiki](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:About) 
+- [Disclaimers](http://ffxivclassic.fragmenterworks.com/wiki/index.php/FFXIV_Classic_Wiki:General_disclaimer) 
+    (window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.005","walltime":"0.012","ppvisitednodes":{"value":14,"limit":1000000},"ppgeneratednodes":{"value":22,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"timingprofile":["100.00% 0.000 1 -total"]},"cachereport":{"timestamp":"20231222101251","ttl":86400,"transientcontent":false}}});});(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":316});});
