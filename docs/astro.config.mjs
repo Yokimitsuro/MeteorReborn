@@ -21,11 +21,6 @@ export default defineConfig({
 			editLink: {
 				baseUrl: 'https://github.com/Yokimitsuro/MeteorReborn/edit/develop/docs/',
 			},
-			defaultLocale: 'root',
-			locales: {
-				root: { label: 'English', lang: 'en' },
-				es: { label: 'Español', lang: 'es' },
-			},
 			sidebar: [
 				{
 					label: 'Getting Started',
