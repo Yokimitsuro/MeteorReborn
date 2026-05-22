@@ -40,6 +40,8 @@ using System.Threading;
 using MeteorReborn.Map.Actors.Chara.Ai;
 using MeteorReborn.Map.Actors.Chara.Ai.Controllers;
 
+using MeteorReborn.Map.Actors.QuestNS;
+
 namespace MeteorReborn.Map.Lua
 {
     class LuaEngine

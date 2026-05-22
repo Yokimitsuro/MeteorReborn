@@ -6,7 +6,7 @@ Server emulator for **FINAL FANTASY XIV 1.0 (version 1.23b)** — a port of
 [Project Meteor](https://bitbucket.org/Ioncannon/project-meteor-server) to a
 modern stack: .NET 10, PostgreSQL and Docker.
 
-PM was abandoned in 2019. Meteor Reborn revives it in a reproducible
+PM was abandoned in 2025. Meteor Reborn revives it in a reproducible
 environment: one `docker compose up` and you connect with a patched 1.23b
 client.
 

@@ -29,6 +29,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using MeteorReborn.Map.Actors.QuestNS;
+
 namespace MeteorReborn.Map.Actors
 {
     class StaticActors

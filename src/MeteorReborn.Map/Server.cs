@@ -53,6 +53,8 @@ namespace MeteorReborn.Map
         private static WorldManager mWorldManager;
         private static Dictionary<uint, ItemData> mGamedataItems;
         private static Dictionary<uint, GuildleveData> mGamedataGuildleves;
+        // PM-COMPLETE (ioncannon/quest_system): quest gamedata catalog loaded at startup.
+        private static Dictionary<uint, MeteorReborn.Map.DataObjects.QuestGameData> mGamedataQuests;
         private static StaticActors mStaticActors;
 
         private PacketProcessor mProcessor;        
@@ -70,6 +72,9 @@ namespace MeteorReborn.Map
             Log.Information("Loaded {0} items.", mGamedataItems.Count);
             mGamedataGuildleves = Database.GetGuildleveGamedata();
             Log.Information("Loaded {0} guildleves.", mGamedataGuildleves.Count);
+            // PM-COMPLETE (ioncannon/quest_system): load quest gamedata at startup.
+            mGamedataQuests = Database.GetQuestGamedata();
+            Log.Information("Loaded {0} quests.", mGamedataQuests.Count);
 
             mWorldManager = new WorldManager(this);
             mWorldManager.LoadZoneList();
@@ -335,6 +340,40 @@ namespace MeteorReborn.Map
                 return mGamedataGuildleves[id];
             else
                 return null;
+        }
+
+        // PM-COMPLETE (ioncannon/quest_system) → quest gamedata accessors.
+        public static MeteorReborn.Map.DataObjects.QuestGameData GetQuestGamedata(uint id)
+        {
+            if (mGamedataQuests != null && mGamedataQuests.ContainsKey(id))
+                return mGamedataQuests[id];
+            return null;
+        }
+
+        public static MeteorReborn.Map.DataObjects.QuestGameData[] GetQuestGamedataByMaxLvl(int lvl, bool all = false)
+        {
+            if (mGamedataQuests == null) return Array.Empty<MeteorReborn.Map.DataObjects.QuestGameData>();
+            if (all)
+                return mGamedataQuests.Values.Where(quest => quest.MinLevel > 0 && quest.MinLevel <= lvl).ToArray();
+            return mGamedataQuests.Values.Where(quest => quest.MinLevel > 0 && quest.MinLevel == lvl).ToArray();
+        }
+
+        public static MeteorReborn.Map.DataObjects.QuestGameData[] GetQuestGamedataByPrerequisite(uint questId)
+        {
+            if (mGamedataQuests == null) return Array.Empty<MeteorReborn.Map.DataObjects.QuestGameData>();
+            return mGamedataQuests.Values.Where(quest => quest.PrerequisiteQuest == questId).ToArray();
+        }
+
+        public static MeteorReborn.Map.DataObjects.QuestGameData[] GetQuestGamedataAllPrerequisite()
+        {
+            if (mGamedataQuests == null) return Array.Empty<MeteorReborn.Map.DataObjects.QuestGameData>();
+            return mGamedataQuests.Values.Where(quest => quest.PrerequisiteQuest != 0).ToArray();
+        }
+
+        public static MeteorReborn.Map.DataObjects.QuestGameData[] GetQuestGamedataAllGCRanked()
+        {
+            if (mGamedataQuests == null) return Array.Empty<MeteorReborn.Map.DataObjects.QuestGameData>();
+            return mGamedataQuests.Values.Where(quest => quest.MinGCRank != 0).ToArray();
         }
 
     }
