@@ -36,6 +36,8 @@ using MeteorReborn.Map.Packets.Receive.SupportDesk;
 using MeteorReborn.Map.Actors.Chara.Ai;
 using MeteorReborn.Map.Packets.Send.Actor.Battle;
 
+using MeteorReborn.Map.Actors.QuestNS;
+
 namespace MeteorReborn.Map
 {
 
@@ -381,6 +383,64 @@ namespace MeteorReborn.Map
                 {
                     conn.Dispose();
                 }
+            }
+        }
+
+        // PM-COMPLETE (ioncannon/quest_system) → load full quest catalog at startup.
+        public static Dictionary<uint, QuestGameData> GetQuestGamedata()
+        {
+            using (var conn = new NpgsqlConnection(String.Format("Host={0}; Port={1}; Database={2}; Username={3}; Password={4}", ConfigConstants.DATABASE_HOST, ConfigConstants.DATABASE_PORT, ConfigConstants.DATABASE_NAME, ConfigConstants.DATABASE_USERNAME, ConfigConstants.DATABASE_PASSWORD)))
+            {
+                var gamedataQuests = new Dictionary<uint, QuestGameData>();
+                try
+                {
+                    conn.Open();
+                    string query = @"SELECT id, classname, questname, prerequisite, minlevel FROM gamedata_quests";
+                    using var cmd = new NpgsqlCommand(query, conn);
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        uint questId = reader.GetUInt32("id");
+                        string code = reader.GetString("classname");
+                        string name = reader.GetString("questname");
+                        uint prerequisite = reader.GetUInt32("prerequisite");
+                        ushort minLevel = reader.GetUInt16("minlevel");
+                        gamedataQuests.Add(questId, new QuestGameData(questId, code, name, prerequisite, minLevel, 0));
+                    }
+                }
+                catch (NpgsqlException e) { Log.Error(e.ToString()); }
+                return gamedataQuests;
+            }
+        }
+
+        // PM-COMPLETE (ioncannon/quest_system) → update an active quest's per-character state.
+        public static void UpdateQuest(Player player, Quest quest)
+        {
+            QuestData qData = quest.GetData();
+            using (var conn = new NpgsqlConnection(String.Format("Host={0}; Port={1}; Database={2}; Username={3}; Password={4}", ConfigConstants.DATABASE_HOST, ConfigConstants.DATABASE_PORT, ConfigConstants.DATABASE_NAME, ConfigConstants.DATABASE_USERNAME, ConfigConstants.DATABASE_PASSWORD)))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"
+                    UPDATE characters_quest_scenario
+                    SET sequence = @sequence, flags = @flags, counter1 = @counter1, counter2 = @counter2, counter3 = @counter3, counter4 = @counter4, npclsfrom = @npcLsFrom, npclsmsgstep = @npcLsMsgStep
+                    WHERE characterid = @charaId AND questid = @questId
+                    ";
+                    using var cmd = new NpgsqlCommand(query, conn);
+                    cmd.Parameters.AddParam("@charaId", (long)player.actorId);
+                    cmd.Parameters.AddParam("@questId", (long)(0xFFFFF & quest.actorId));
+                    cmd.Parameters.AddParam("@sequence", (int)quest.GetSequence());
+                    cmd.Parameters.AddParam("@flags", (long)qData.GetFlags());
+                    cmd.Parameters.AddParam("@counter1", (int)qData.GetCounter(1));
+                    cmd.Parameters.AddParam("@counter2", (int)qData.GetCounter(2));
+                    cmd.Parameters.AddParam("@counter3", (int)qData.GetCounter(3));
+                    cmd.Parameters.AddParam("@counter4", (int)qData.GetCounter(4));
+                    cmd.Parameters.AddParam("@npcLsFrom", (int)qData.GetNpcLsFrom());
+                    cmd.Parameters.AddParam("@npcLsMsgStep", (int)qData.GetMsgStep());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (NpgsqlException e) { Log.Error(e.ToString()); }
             }
         }
 

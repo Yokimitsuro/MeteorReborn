@@ -45,6 +45,8 @@ using MeteorReborn.Map.Packets.Receive.Events;
 using static MeteorReborn.Map.LuaUtils;
 using MeteorReborn.Map.Packets.Send.Actor.Events;
 
+using MeteorReborn.Map.Actors.QuestNS;
+
 namespace MeteorReborn.Map.Actors
 {
     class Player : Character
@@ -1641,8 +1643,24 @@ namespace MeteorReborn.Map.Actors
             return -1;
         }
 
+        // PM-COMPLETE (ioncannon/quest_system) → helper used by Quest hand-off.
+        public bool HasNpcLs(uint npcLsId)
+        {
+            return !(playerWork.npcLinkshellChatExtra[npcLsId - 1] == false && playerWork.npcLinkshellChatCalling[npcLsId - 1] == false);
+        }
+
+        // PM-COMPLETE (ioncannon/quest_system) → grant an NPC linkpearl + display message.
+        public void AddNpcLs(uint npcLsId)
+        {
+            if (playerWork.npcLinkshellChatExtra[npcLsId - 1] == false && playerWork.npcLinkshellChatCalling[npcLsId - 1] == false)
+            {
+                SetNpcLS(npcLsId, NPCLS_INACTIVE);
+                SendGameMessage(Server.GetWorldManager().GetActor(), 25118, 0x20, npcLsId); // "<NpcLs> linkpearl obtained."
+            }
+        }
+
         public void SetNpcLS(uint npcLSId, uint state)
-        {            
+        {
             bool isCalling, isExtra;
             isCalling = isExtra = false;
 

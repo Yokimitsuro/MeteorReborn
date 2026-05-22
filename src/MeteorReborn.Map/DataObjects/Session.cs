@@ -88,6 +88,16 @@ class Session
         playerActor.QueuePositionUpdate(new Vector3(x, y, z));
     }
 
+    // PM-INCOMPLETE (FINISH-PM stub): the ioncannon/quest_system branch added a
+    // version that updates an NPC's quest icon/emote status in this session's actor
+    // instance list. It depends on `QuestENpc` and `SetActorQuestGraphicPacket` which
+    // aren't ported yet. Stubbed to no-op so QuestState.cs compiles; flesh out when
+    // the quest_system data pipeline is fully wired.
+    public void UpdateQuestNpcInInstance(object questENpc, bool clearInstance = false)
+    {
+        // TODO: port full body from PM/Map Server/DataObjects/Session.cs:183
+    }
+
     public void UpdateInstance(List<Actor> list, bool force = false)
     {
         if (isUpdatesLocked && !force)

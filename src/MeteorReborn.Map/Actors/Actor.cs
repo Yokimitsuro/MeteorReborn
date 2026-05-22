@@ -63,6 +63,18 @@ namespace MeteorReborn.Map.Actors
         public uint actorId;
         public string actorName;
 
+        // PM-COMPLETE (ioncannon/quest_system) → property aliases.
+        // PM's quest_system branch renamed actorId→Id and actorName→Name project-wide
+        // but the rename was never merged. MR keeps the original field names and exposes
+        // the renamed identifiers as aliases so quest_system files (Quest, QuestData,
+        // QuestState, QuestStateManager) compile against MR's existing tree.
+        public uint Id => actorId;
+        public string Name
+        {
+            get => actorName;
+            set => actorName = value;
+        }
+
         public uint displayNameId = 0xFFFFFFFF;
         public string customDisplayName;
 
